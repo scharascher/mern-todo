@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const User = require('./user.model');
-const Type = require('./type.model');
+const Type = require('./todoType.model');
 
-const exerciseSchema = new mongoose.Schema({
+const todoSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: User,
@@ -12,11 +12,15 @@ const exerciseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: Type,
     },
+    title: {
+        type: String,
+        required: true,
+    },
     description: {
         type: String,
         required: true,
     },
-    importance: {
+    priority: {
         type: Number,
         enum: [0, 1, 2]
     },
@@ -32,6 +36,6 @@ const exerciseSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Exercise = mongoose.model('Exercise', exerciseSchema);
+const Todo = mongoose.model('Todo', todoSchema);
 
-module.exports = Exercise;
+module.exports = Todo;

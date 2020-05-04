@@ -21,10 +21,10 @@ mongoose.connection.once('open', () => {
     console.log('MongoDB connection successful');
 });
 
-const exercisesRouter = require('./routes/exercises');
+const todosRouter = require('./routes/todos');
 const usersRouter = require('./routes/users');
-app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+app.use('/todos', todosRouter);
+app.use('/', usersRouter);
 
 app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
