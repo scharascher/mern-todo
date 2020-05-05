@@ -1,11 +1,12 @@
 import React from 'react';
 import './Routes.scss';
 import { Switch, Route } from 'react-router-dom';
-import Home from '../Home/Home';
-import Todos from '../Todos/Todos';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import AddTodo from '../AddTodo/AddTodo';
+import Home from '../../pages/Home/Home';
+import Todos from '../../pages/Todos/Todos';
+import Register from '../../pages/Register/Register';
+import Login from '../../pages/Login/Login';
+import AddTodo from '../../pages/AddTodo/AddTodo';
+import EditTodo from '../../pages/EditTodo/EditTodo';
 
 const Routes: React.FC = () => {
     return (
@@ -18,6 +19,9 @@ const Routes: React.FC = () => {
             </Route>
             <Route path="/add-todo">
                 <AddTodo />
+            </Route>
+            <Route path="/edit-todo/:id">
+                <EditTodo />
             </Route>
             <Route path="/register">
                 <Register />

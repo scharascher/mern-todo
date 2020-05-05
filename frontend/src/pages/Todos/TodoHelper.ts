@@ -5,4 +5,5 @@ export interface Todo {
     description: string;
     type: string;
     date: Date;
+    _id: string;
 }

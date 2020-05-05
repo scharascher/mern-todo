@@ -14,7 +14,8 @@ module.exports =  {
         },
     },
     rules:  {
-        'react/prop-types': 0
+        'react/prop-types': 0,
+        'prefer-template': 1
     },
     settings:  {
         react:  {
