@@ -16,7 +16,7 @@ class Todos extends React.Component<{}, { todos: Todo[] }> {
     }
 
     componentDidMount(): void {
-        api('todos').then((data) => {
+        api('todos', 'GET', null, { credentials: 'include' }).then((data) => {
             this.setState(() => ({ todos: data }));
         });
     }

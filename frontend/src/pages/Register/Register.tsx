@@ -1,35 +1,27 @@
 import React, { useState } from 'react';
 import './Register.scss';
+import api from '../../helpers/api';
+import { Redirect } from 'react-router-dom';
+import LoginForm, { LoginData } from '../../components/LoginForm/LoginForm';
 
 const Register: React.FC = () => {
-    const [username, setUsername] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [success, setSuccess] = useState<boolean>(false);
+
+    const handleSubmit = (data: LoginData): void => {
+        api('register', 'POST', data).then((response) => {
+            if (response.success) {
+                setSuccess(true);
+            } else {
+                setSuccess(false);
+            }
+        });
+    };
 
     return (
-        <form className="form">
-            <div className="form__row">
-                <label htmlFor="register">
-                    Username:&nbsp;
-                    <input
-                        id="register"
-                        type="text"
-                        value={username}
-                        onChange={(e): void => setUsername(e.target.value)}
-                    />
-                </label>
-            </div>
-            <div className="form__row">
-                <label htmlFor="password">
-                    Password:&nbsp;
-                    <input
-                        id="password"
-                        type="password"
-                        value={password}
-                        onChange={(e): void => setPassword(e.target.value)}
-                    />
-                </label>
-            </div>
-        </form>
+        <>
+            {success && <Redirect to="/login" />}
+            <LoginForm onSubmit={handleSubmit}>Register</LoginForm>
+        </>
     );
 };
 

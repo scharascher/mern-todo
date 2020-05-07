@@ -1,8 +1,10 @@
 const routes = require('express').Router();
 const handleRouteError = require('../utils/handleRouteError');
-
 const Todo = require('../models/todo.model');
 const TodoType = require('../models/todoType.model');
+
+const isLoggedIn = require('../utils/isLoggedIn');
+routes.use(isLoggedIn);
 routes.route('/').get((req, res, next) => {
     handleRouteError(
         Todo.find().then((todos) => res.json(todos)),
@@ -27,9 +29,7 @@ routes.route('/:id').get((req, res, next) => {
 });
 routes.route('/:id').delete((req, res, next) => {
     handleRouteError(
-        Todo.findByIdAndDelete(req.params.id).then(() =>
-            res.json({ success: 1 }),
-        ),
+        Todo.findByIdAndDelete(req.params.id).then(() => res.json({ success: 1 })),
         next,
     );
 });
@@ -50,18 +50,16 @@ module.exports = routes;
 
 async function getTodoObjectByReq(req) {
     return new Promise((resolve) => {
-        const defaultType = TodoType.findOne({ name: req.body.type }).then(
-            (type) => {
-                resolve({
-                    userId: req.body.userId,
-                    title: req.body.title,
-                    description: req.body.description,
-                    duration: Number(req.body.duration),
-                    date: Date.parse(req.body.date),
-                    priority: Number(req.body.priority),
-                    typeId: type._id,
-                });
-            },
-        );
+        TodoType.findOne({ name: req.body.type }).then((type) => {
+            resolve({
+                userId: req.body.userId,
+                title: req.body.title,
+                description: req.body.description,
+                duration: Number(req.body.duration),
+                date: Date.parse(req.body.date),
+                priority: Number(req.body.priority),
+                typeId: type._id,
+            });
+        });
     });
 }
