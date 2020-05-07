@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const AppError = require('./utils/AppError');
 const ErrorType = require('./utils/ErrorType');
 const User = require('./models/user.model');
+const isLoggedIn = require('./utils/isLoggedIn');
 
 require('dotenv').config();
 
@@ -23,13 +24,13 @@ app.use(
         secure: false,
     }),
 );
-app.use(express.json());
+app.use(cookieParser(process.env.SECRET));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(cookieParser(process.env.SECRET));
 
-app.use(passport.initialize());
-app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -55,16 +56,18 @@ app.use(
         secret: process.env.SECRET,
         resave: true,
         rolling: true,
-        saveUninitialized: false,
+        saveUninitialized: true,
         store: sessionStore,
     }),
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 const todosRouter = require('./routes/todos');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 app.use('/api/', authRouter);
-app.use('/api/todos', todosRouter);
+app.use('/api/todos', isLoggedIn, todosRouter);
 app.use('/api/users', usersRouter);
 
 app.all('*', (req, res, next) => {

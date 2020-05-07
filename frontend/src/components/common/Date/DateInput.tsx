@@ -10,7 +10,7 @@ const DateInput: React.FC<{
     id?: string;
     placeholder?: string;
     type?: string;
-    value: Date;
+    value: number;
     onChange: (date: MaterialUiPickersDate, value: string | null | undefined) => void;
 }> = (props) => {
     return (
@@ -23,7 +23,7 @@ const DateInput: React.FC<{
                     margin="normal"
                     id={props.id}
                     label={props.placeholder}
-                    value={props.value}
+                    value={new Date(props.value)}
                     onChange={props.onChange}
                     KeyboardButtonProps={{
                         'aria-label': 'change date',

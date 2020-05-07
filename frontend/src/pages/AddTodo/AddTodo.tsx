@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddTodo.scss';
 import TodoForm from '../../components/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
 import { Todo } from '../Todos/TodoHelper';
 import Alert from '../../components/common/Alert/Alert';
-import api from '../../helpers/api';
+import Api from '../../helpers/api';
+import Cookies from 'js-cookie';
 
 const AddTodo: React.FC<{}> = () => {
+    let userId;
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        userId = Cookies.get('userId');
+        if (!userId) {
+            console.error('userId unknown');
+        }
+    }, []);
 
     const onSubmit = (data: Omit<Todo, '_id'>): void => {
         setOpen(true);
-        api('todos', 'PUT', data).then((data) => {
+        Api.authorizedRequest('todos', 'PUT', data).then((data) => {
             if (data.success) {
                 setOpen(true);
             }

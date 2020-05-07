@@ -2,7 +2,7 @@ import React from 'react';
 import './TodoItem.scss';
 import { Todo } from '../TodoHelper';
 import { Typography } from '@material-ui/core';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const TodoItem: React.FC<{ item: Todo }> = ({ item }) => {
     return (
@@ -17,11 +17,11 @@ const TodoItem: React.FC<{ item: Todo }> = ({ item }) => {
                 {item.duration}
             </Typography>
             <Typography variant="caption" display="block" gutterBottom>
-                {item.date}
+                {`${new Date(item.date)}`}
             </Typography>
 
             <Typography variant="caption" display="block" gutterBottom>
-                <Link to={'/edit-todo/' + item._id}>Edit</Link>
+                <Link to={`/edit-todo/${item._id}`}>Edit</Link>
             </Typography>
         </div>
     );

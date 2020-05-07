@@ -4,6 +4,6 @@ export interface Todo {
     title: string;
     description: string;
     type: string;
-    date: Date;
+    date: number; // timestamp
     _id: string;
 }

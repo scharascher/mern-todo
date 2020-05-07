@@ -4,8 +4,8 @@ import TodoForm from '../../components/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
 import { Todo } from '../Todos/TodoHelper';
 import Alert from '../../components/common/Alert/Alert';
-import api from '../../helpers/api';
 import { Link, useParams } from 'react-router-dom';
+import Api from '../../helpers/api';
 
 const EditTodo: React.FC<{}> = () => {
     const [open, setOpen] = useState<boolean>(false);
@@ -13,7 +13,7 @@ const EditTodo: React.FC<{}> = () => {
     const { id } = useParams();
     const onSubmit = (data: Omit<Todo, '_id'>): void => {
         setOpen(true);
-        api(`todos/${id}`, 'POST', data).then((data) => {
+        Api.authorizedRequest(`todos/${id}`, 'POST', data).then((data) => {
             if (data.success) {
                 setOpen(true);
             }
@@ -21,7 +21,7 @@ const EditTodo: React.FC<{}> = () => {
     };
 
     useEffect(() => {
-        api(`todos/${id}`).then((data: Todo) => {
+        Api.authorizedRequest(`todos/${id}`).then((data: Todo) => {
             setTodo(data);
         });
     }, []);

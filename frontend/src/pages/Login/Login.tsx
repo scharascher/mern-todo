@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.scss';
-import api from '../../helpers/api';
+import Api from '../../helpers/api';
 import LoginForm, { LoginData } from '../../components/LoginForm/LoginForm';
 import { Redirect } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const Login: React.FC = () => {
     const [success, setSuccess] = useState<boolean>(false);
 
     const handleSubmit = (data: LoginData): void => {
-        api('login', 'POST', data, { credentials: 'include' }).then((response) => {
+        Api.authorizedRequest('login', 'POST', data).then((response) => {
             if (response.success) {
                 setSuccess(true);
             } else {

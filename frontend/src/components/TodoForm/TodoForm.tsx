@@ -8,7 +8,6 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import Submit from '../common/Submit/Submit';
 import { Todo } from '../../pages/Todos/TodoHelper';
 
-const userId = '5ea85498f9fd2178271ecb26';
 const types: Option[] = [
     {
         value: 'default',
@@ -42,7 +41,7 @@ class TodoForm extends React.Component<
             title: '',
             description: '',
             duration: 10,
-            date: new Date(),
+            date: +new Date(),
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -87,7 +86,7 @@ class TodoForm extends React.Component<
     }
 
     handleDateChange(newDate: MaterialUiPickersDate): void {
-        const date = newDate as Date;
+        const date = +(newDate as Date);
         this.setState(() => ({ date }));
     }
 
@@ -100,7 +99,6 @@ class TodoForm extends React.Component<
             priority: this.state.priority,
             duration: this.state.duration,
             date: this.state.date,
-            userId,
         };
         this.props.onSubmit(data);
     }

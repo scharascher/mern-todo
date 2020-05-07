@@ -4,7 +4,7 @@ import TodoList from './TodoList/TodoList';
 import TodoFilter from './TodoFilter/TodoFilter';
 import { Container } from '@material-ui/core';
 import { Todo } from './TodoHelper';
-import api from '../../helpers/api';
+import Api from '../../helpers/api';
 import { Link } from 'react-router-dom';
 
 class Todos extends React.Component<{}, { todos: Todo[] }> {
@@ -16,7 +16,7 @@ class Todos extends React.Component<{}, { todos: Todo[] }> {
     }
 
     componentDidMount(): void {
-        api('todos', 'GET', null, { credentials: 'include' }).then((data) => {
+        Api.authorizedRequest('todos', 'GET', null, { credentials: 'include' }).then((data) => {
             this.setState(() => ({ todos: data }));
         });
     }

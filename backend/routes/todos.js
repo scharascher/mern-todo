@@ -3,11 +3,9 @@ const handleRouteError = require('../utils/handleRouteError');
 const Todo = require('../models/todo.model');
 const TodoType = require('../models/todoType.model');
 
-const isLoggedIn = require('../utils/isLoggedIn');
-routes.use(isLoggedIn);
 routes.route('/').get((req, res, next) => {
     handleRouteError(
-        Todo.find().then((todos) => res.json(todos)),
+        Todo.find(getUserIdObjFromReq(req)).then((todos) => res.json(todos)),
         next,
     );
 });
@@ -52,14 +50,18 @@ async function getTodoObjectByReq(req) {
     return new Promise((resolve) => {
         TodoType.findOne({ name: req.body.type }).then((type) => {
             resolve({
-                userId: req.body.userId,
                 title: req.body.title,
                 description: req.body.description,
                 duration: Number(req.body.duration),
-                date: Date.parse(req.body.date),
+                date: Number(req.body.date),
                 priority: Number(req.body.priority),
                 typeId: type._id,
+                ...getUserIdObjFromReq(req),
             });
         });
     });
+}
+
+function getUserIdObjFromReq(req) {
+    return { userId: req.user._id.toString() };
 }

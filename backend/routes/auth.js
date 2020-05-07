@@ -10,7 +10,7 @@ const passport = require('passport');
 // });
 
 routes.route('/login').post((req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', (err, user) => {
         if (err) {
             res.json({ success: 0, error: err });
         }
@@ -24,6 +24,7 @@ routes.route('/login').post((req, res, next) => {
                 res.json({ success: 0, error: err });
                 return;
             }
+            res.cookie('userId', user._id.toString());
             res.json({ success: 1 });
         });
     })(req, res, next);
