@@ -1,7 +1,7 @@
 import React from 'react';
 import './Login.scss';
-import Api from '../../helpers/api';
-import LoginForm, { LoginData } from '../../components/LoginForm/LoginForm';
+import Api from 'helpers/api';
+import LoginForm, { LoginData } from 'containers/LoginForm/LoginForm';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const Login: React.FC = () => {

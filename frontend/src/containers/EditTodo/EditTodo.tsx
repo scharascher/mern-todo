@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './EditTodo.scss';
-import TodoForm from '../../components/TodoForm/TodoForm';
+import TodoForm from 'containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
-import { Todo } from '../Todos/TodoHelper';
-import Alert from '../../components/common/Alert/Alert';
+import { Todo } from 'helpers/TodoHelper';
+import Alert from 'components/Alert/Alert';
 import { Link, useParams } from 'react-router-dom';
-import Api from '../../helpers/api';
+import Api from 'helpers/api';
 
 const EditTodo: React.FC<{}> = () => {
     const [open, setOpen] = useState<boolean>(false);

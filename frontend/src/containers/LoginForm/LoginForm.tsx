@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginForm.scss';
-import Submit from '../../components/common/Submit/Submit';
-import Input from '../../components/common/Input/Input';
+import Submit from 'components/Submit/Submit';
+import Input from 'components/Input/Input';
 
 const LoginForm: React.FC<{ onSubmit: (data: LoginData) => void }> = ({ onSubmit, children }) => {
     const [username, setUsername] = useState<string>('');

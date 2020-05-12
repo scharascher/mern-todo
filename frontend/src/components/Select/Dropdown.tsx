@@ -4,7 +4,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { DropdownValue, Option } from './Option';
+import { DropdownValue, Option } from 'helpers/Option';
 
 const Dropdown: React.FC<{
     id?: string;

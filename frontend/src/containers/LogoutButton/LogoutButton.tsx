@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LogoutButton.scss';
 import Button from '@material-ui/core/Button';
-import LogoutRedirect from '../common/LogoutRedirect/LogoutRedirect';
+import LogoutRedirect from 'containers/LogoutRedirect/LogoutRedirect';
 
 const LogoutButton: React.FC = () => {
     const [logout, setLogout] = useState<boolean>(false);

@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import LogoutButton from '../LogoutButton/LogoutButton';
+import LogoutButton from 'containers/LogoutButton/LogoutButton';
 import Cookies from 'js-cookie';
 
 const useStyles = makeStyles((theme: Theme) =>

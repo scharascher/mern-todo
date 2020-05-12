@@ -1,10 +1,10 @@
 import React from 'react';
 import './Todos.scss';
-import TodoList from './TodoList/TodoList';
-import TodoFilter from './TodoFilter/TodoFilter';
+import TodoList from 'components/TodoList/TodoList';
+import TodoFilter from 'components/TodoFilter/TodoFilter';
 import { Container } from '@material-ui/core';
-import { Todo } from './TodoHelper';
-import Api from '../../helpers/api';
+import { Todo } from 'helpers/TodoHelper';
+import Api from 'helpers/api';
 import { Link } from 'react-router-dom';
 
 class Todos extends React.Component<{}, { todos: Todo[] }> {

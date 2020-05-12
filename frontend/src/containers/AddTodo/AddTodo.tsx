@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './AddTodo.scss';
-import TodoForm from '../../components/TodoForm/TodoForm';
+import TodoForm from 'containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
-import { Todo } from '../Todos/TodoHelper';
-import Alert from '../../components/common/Alert/Alert';
-import Api from '../../helpers/api';
+import { Todo } from 'helpers/TodoHelper';
+import Alert from 'components/Alert/Alert';
+import Api from 'helpers/api';
 import Cookies from 'js-cookie';
 
 const AddTodo: React.FC<{}> = () => {

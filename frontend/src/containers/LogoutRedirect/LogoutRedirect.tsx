@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './LogoutRedirect.scss';
-import Api from '../../../helpers/api';
+import Api from 'helpers/api';
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const LogoutRedirect: React.FC = ({ children }) => {
+const LogoutRedirect: React.FC = () => {
     const [success, setSuccess] = useState<boolean>(false);
 
     useEffect(() => {
@@ -19,7 +19,6 @@ const LogoutRedirect: React.FC = ({ children }) => {
     return (
         <>
             {success && <Redirect to="/" />}
-            {children}
         </>
     );
 };

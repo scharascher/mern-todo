@@ -1,6 +1,6 @@
 import React from 'react';
 import './TodoItem.scss';
-import { Todo } from '../TodoHelper';
+import { Todo } from 'helpers/TodoHelper';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 

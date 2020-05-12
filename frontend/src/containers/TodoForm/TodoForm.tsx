@@ -1,12 +1,12 @@
 import React, { SyntheticEvent } from 'react';
 import './TodoForm.scss';
-import Input from '../common/Input/Input';
-import Dropdown from '../common/Select/Dropdown';
-import { Option } from '../common/Select/Option';
-import DateInput from '../common/Date/DateInput';
+import Input from 'components/Input/Input';
+import Dropdown from 'components/Select/Dropdown';
+import { Option } from 'helpers/Option';
+import DateInput from 'components/Date/DateInput';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
-import Submit from '../common/Submit/Submit';
-import { Todo } from '../../pages/Todos/TodoHelper';
+import Submit from 'components/Submit/Submit';
+import { Todo } from 'helpers/TodoHelper';
 
 const types: Option[] = [
     {

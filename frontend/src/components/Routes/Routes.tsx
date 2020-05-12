@@ -1,13 +1,13 @@
 import React from 'react';
 import './Routes.scss';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Home from '../../pages/Home/Home';
-import Todos from '../../pages/Todos/Todos';
-import Register from '../../pages/Register/Register';
-import Login from '../../pages/Login/Login';
-import AddTodo from '../../pages/AddTodo/AddTodo';
-import EditTodo from '../../pages/EditTodo/EditTodo';
-import Cookies from 'js-cookie';
+import { Switch, Route } from 'react-router-dom';
+import Home from 'components/Home/Home';
+import Todos from 'containers/Todos/Todos';
+import Register from 'containers/Register/Register';
+import Login from 'containers/Login/Login';
+import AddTodo from 'containers/AddTodo/AddTodo';
+import EditTodo from 'containers/EditTodo/EditTodo';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 
 const Routes: React.FC = () => {
     return (
@@ -38,23 +38,3 @@ const Routes: React.FC = () => {
 };
 
 export default Routes;
-
-const PrivateRoute: React.FC<any> = ({ children, ...rest }) => {
-    return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                Cookies.get('userId') ? (
-                    children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: '/login',
-                            state: { from: location },
-                        }}
-                    />
-                )
-            }
-        />
-    );
-};
