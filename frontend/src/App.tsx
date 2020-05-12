@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
-import Navbar from './components/Navbar/Navbar';
-import Routes from './components/Routes/Routes';
+import Navbar from 'components/Navbar/Navbar';
+import Routes from 'components/Routes/Routes';
 
 const App: React.FC = () => {
     return (

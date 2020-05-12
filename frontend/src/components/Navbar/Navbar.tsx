@@ -6,6 +6,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import LogoutButton from '../LogoutButton/LogoutButton';
+import Cookies from 'js-cookie';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -24,15 +26,25 @@ const useStyles = makeStyles((theme: Theme) =>
 const Navbar: React.FC = () => {
     const classes = useStyles();
 
-    return (
+    return Cookies.get('userId') ? (
+        <>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                        <Link to="/todos">Todos</Link>&nbsp;
+                        <Link to="/add-todo">Add todo</Link>&nbsp;
+                        <Link to="/user-info">User info</Link>
+                    </Typography>
+                    <LogoutButton />
+                </Toolbar>
+            </AppBar>
+        </>
+    ) : (
         <>
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         <Link to="/">Home</Link>&nbsp;
-                        <Link to="/todos">Todos</Link>&nbsp;
-                        <Link to="/add-todo">Add todo</Link>&nbsp;
-                        <Link to="/user-info">User info</Link>
                     </Typography>
                     <Link to="/register">
                         <Button variant="contained">Register</Button>

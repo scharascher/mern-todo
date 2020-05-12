@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Login.scss';
 import Api from '../../helpers/api';
 import LoginForm, { LoginData } from '../../components/LoginForm/LoginForm';
-import { Redirect } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const Login: React.FC = () => {
-    const [success, setSuccess] = useState<boolean>(false);
+    const history = useHistory();
+    const location = useLocation();
+    const locationFrom = (location.state as { from: { pathname: string } })?.from || {
+        pathname: '/',
+    };
+    const from = locationFrom.pathname !== '/' ? locationFrom : { pathname: '/todos' };
 
     const handleSubmit = (data: LoginData): void => {
-        Api.authorizedRequest('login', 'POST', data).then((response) => {
-            if (response.success) {
-                setSuccess(true);
-            } else {
-                setSuccess(false);
-            }
+        Api.authorizedRequest('login', 'POST', data).then(() => {
+            history.replace(from);
         });
     };
 
     return (
         <>
-            {success && <Redirect to="/todos" />}
             <LoginForm onSubmit={handleSubmit}>Login</LoginForm>
         </>
     );

@@ -1,28 +1,29 @@
 import React from 'react';
 import './Routes.scss';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../../pages/Home/Home';
 import Todos from '../../pages/Todos/Todos';
 import Register from '../../pages/Register/Register';
 import Login from '../../pages/Login/Login';
 import AddTodo from '../../pages/AddTodo/AddTodo';
 import EditTodo from '../../pages/EditTodo/EditTodo';
+import Cookies from 'js-cookie';
 
 const Routes: React.FC = () => {
     return (
         <Switch>
-            <Route path="/user-info">
+            <PrivateRoute path="/user-info">
                 <Home />
-            </Route>
-            <Route path="/todos">
+            </PrivateRoute>
+            <PrivateRoute path="/todos">
                 <Todos />
-            </Route>
-            <Route path="/add-todo">
+            </PrivateRoute>
+            <PrivateRoute path="/add-todo">
                 <AddTodo />
-            </Route>
-            <Route path="/edit-todo/:id">
+            </PrivateRoute>
+            <PrivateRoute path="/edit-todo/:id">
                 <EditTodo />
-            </Route>
+            </PrivateRoute>
             <Route path="/register">
                 <Register />
             </Route>
@@ -37,3 +38,23 @@ const Routes: React.FC = () => {
 };
 
 export default Routes;
+
+const PrivateRoute: React.FC<any> = ({ children, ...rest }) => {
+    return (
+        <Route
+            {...rest}
+            render={({ location }) =>
+                Cookies.get('userId') ? (
+                    children
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: '/login',
+                            state: { from: location },
+                        }}
+                    />
+                )
+            }
+        />
+    );
+};
