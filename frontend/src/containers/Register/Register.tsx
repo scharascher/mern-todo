@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Register.scss';
 import Api from 'helpers/api';
 import { Redirect } from 'react-router-dom';
-import LoginForm, { LoginData } from 'components/LoginForm/LoginForm';
+import LoginForm, { LoginData } from 'containers/LoginForm/LoginForm';
 
 const Register: React.FC = () => {
     const [success, setSuccess] = useState<boolean>(false);

@@ -1,8 +1,9 @@
 import React from 'react';
 import './TodoItem.scss';
-import { Todo } from 'helpers/TodoHelper';
+import { Todo } from 'helpers/Todo';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import DeleteTodoLink from 'containers/DeleteTodoLink/DeleteTodoLink';
 
 const TodoItem: React.FC<{ item: Todo }> = ({ item }) => {
     return (
@@ -22,6 +23,7 @@ const TodoItem: React.FC<{ item: Todo }> = ({ item }) => {
 
             <Typography variant="caption" display="block" gutterBottom>
                 <Link to={`/edit-todo/${item._id}`}>Edit</Link>
+                <DeleteTodoLink _id={item._id} />
             </Typography>
         </div>
     );

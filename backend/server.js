@@ -78,7 +78,6 @@ app.use((err, req, res, next) => {
     err.status = err.status || ErrorType.ERROR;
 
     res.status(err.statusCode).json({
-        success: 0,
         status: err.status,
         message: err.message,
     });

@@ -33,12 +33,17 @@ class Api {
             ...body,
             ...fetchOptions,
         });
-        return res.json().then((response) => {
-            if (response.error === 'NOT_AUTHORIZED') {
-                console.error('not authed');
-            }
-            return response;
-        });
+        return res
+            .text()
+            .then((text) => {
+                return text ? JSON.parse(text) : {};
+            })
+            .then((obj) => {
+                if (obj.error === 'NOT_AUTHORIZED') {
+                    console.error('not authed');
+                }
+                return obj;
+            });
     }
 }
 

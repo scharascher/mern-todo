@@ -16,11 +16,7 @@ const LogoutRedirect: React.FC = () => {
             .catch();
     }, []);
 
-    return (
-        <>
-            {success && <Redirect to="/" />}
-        </>
-    );
+    return <>{success && <Redirect to="/" />}</>;
 };
 
 export default LogoutRedirect;

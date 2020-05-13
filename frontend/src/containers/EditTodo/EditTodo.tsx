@@ -2,29 +2,26 @@ import React, { useEffect, useState } from 'react';
 import './EditTodo.scss';
 import TodoForm from 'containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
-import { Todo } from 'helpers/TodoHelper';
+import { Todo } from 'helpers/Todo';
 import Alert from 'components/Alert/Alert';
-import { Link, useParams } from 'react-router-dom';
-import Api from 'helpers/api';
+import { Link } from 'react-router-dom';
+import { editTodo, fetchTodosIfNeeded } from 'actions/todos';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-const EditTodo: React.FC<{}> = () => {
+const EditTodo: React.FC<any> = ({ dispatch, todo }) => {
     const [open, setOpen] = useState<boolean>(false);
-    const [todo, setTodo] = useState<Todo | null>(null);
-    const { id } = useParams();
-    const onSubmit = (data: Omit<Todo, '_id'>): void => {
-        setOpen(true);
-        Api.authorizedRequest(`todos/${id}`, 'POST', data).then((data) => {
-            if (data.success) {
-                setOpen(true);
-            }
-        });
-    };
 
     useEffect(() => {
-        Api.authorizedRequest(`todos/${id}`).then((data: Todo) => {
-            setTodo(data);
-        });
-    }, []);
+        if (!todo) {
+            dispatch(fetchTodosIfNeeded());
+        }
+    });
+
+    const onSubmit = (data: Todo): void => {
+        setOpen(true);
+        dispatch(editTodo(data));
+    };
 
     return (
         <Container maxWidth="md">
@@ -40,4 +37,13 @@ const EditTodo: React.FC<{}> = () => {
     );
 };
 
-export default EditTodo;
+const mapStateToProps = (state: any, ownProps: any) => {
+    const todos = state.todos?.items || [];
+    const id = ownProps.match?.params?.id;
+    const todo = todos.find((todo: Todo) => todo._id === id);
+    return {
+        todo,
+    };
+};
+
+export default withRouter(connect(mapStateToProps)(EditTodo));

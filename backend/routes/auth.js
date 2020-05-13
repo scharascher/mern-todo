@@ -14,20 +14,23 @@ routes.route('/checkAuth').post(isLoggedIn);
 routes.route('/login').post((req, res, next) => {
     passport.authenticate('local', (err, user) => {
         if (err) {
-            res.json({ success: 0, error: err });
+            res.status(500);
+            res.json({ error: err });
         }
 
         if (!user) {
-            res.json({ success: 0, error: 'INVALID' });
+            res.status(400);
+            res.json({ error: 'INVALID' });
         }
 
         req.login(user, function (err) {
             if (err) {
-                res.json({ success: 0, error: err });
+                res.status(500);
+                res.json({ error: err });
                 return;
             }
             res.cookie('userId', user._id.toString());
-            res.json({ success: 1 });
+            res.json();
         });
     })(req, res, next);
 });
@@ -35,19 +38,17 @@ routes.route('/login').post((req, res, next) => {
 routes.route('/register').post(async (req, res) => {
     User.register(new User({ username: req.body.username }), req.body.password, function (err) {
         if (err) {
-            console.log('error while user register!', err);
-            res.json({ success: 0, error: err });
+            res.status(500);
+            res.json({ error: err });
         }
-
-        console.log('user registered!');
-        res.json({ success: 1 });
+        res.json();
     });
 });
 
 routes.get('/logout', function (req, res) {
     req.logout();
     res.status(200);
-    res.json({});
+    res.json();
 });
 
 module.exports = routes;

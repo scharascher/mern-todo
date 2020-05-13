@@ -14,7 +14,7 @@ routes.route('/').put(async (req, res, next) => {
     const obj = await getTodoObjectByReq(req);
     const newTodo = new Todo(obj);
     handleRouteError(
-        newTodo.save().then(() => res.json({ success: 1 })),
+        newTodo.save().then(() => res.json({ _id: newTodo._id })),
         next,
     );
 });
@@ -27,7 +27,7 @@ routes.route('/:id').get((req, res, next) => {
 });
 routes.route('/:id').delete((req, res, next) => {
     handleRouteError(
-        Todo.findByIdAndDelete(req.params.id).then(() => res.json({ success: 1 })),
+        Todo.findByIdAndDelete(req.params.id).then(() => res.json()),
         next,
     );
 });
@@ -37,7 +37,7 @@ routes.route('/:id').post((req, res, next) => {
             const obj = await getTodoObjectByReq(req);
             todo = Object.assign(todo, obj);
             handleRouteError(
-                todo.save().then(() => res.json({ success: 1 })),
+                todo.save().then(() => res.json()),
                 next,
             );
         }),

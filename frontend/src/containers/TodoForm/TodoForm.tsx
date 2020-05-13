@@ -6,7 +6,7 @@ import { Option } from 'helpers/Option';
 import DateInput from 'components/Date/DateInput';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import Submit from 'components/Submit/Submit';
-import { Todo } from 'helpers/TodoHelper';
+import { Todo } from 'helpers/Todo';
 
 const types: Option[] = [
     {
@@ -30,10 +30,10 @@ const priorities: Option[] = [
 ];
 
 class TodoForm extends React.Component<
-    { todo?: null | Todo; onSubmit: (data: Omit<Todo, '_id'>) => void },
-    Omit<Todo, '_id'>
+    { todo?: null | Todo; onSubmit: (data: Todo) => void },
+    Todo
 > {
-    constructor(props: { todo?: null | Todo; onSubmit: (data: Omit<Todo, '_id'>) => void }) {
+    constructor(props: { todo?: null | Todo; onSubmit: (data: Todo) => void }) {
         super(props);
         this.state = {
             priority: priorities[0].value as number,
@@ -42,6 +42,7 @@ class TodoForm extends React.Component<
             description: '',
             duration: 10,
             date: +new Date(),
+            _id: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -52,11 +53,17 @@ class TodoForm extends React.Component<
         this.handlePriorityChange = this.handlePriorityChange.bind(this);
     }
 
+    componentDidMount(): void {
+        if (this.props.todo) {
+            this.setState(() => this.props.todo as Todo);
+        }
+    }
+
     componentDidUpdate(
-        prevProps: Readonly<{ todo?: Todo | null; onSubmit: (data: Omit<Todo, '_id'>) => void }>,
+        prevProps: Readonly<{ todo?: Todo | null; onSubmit: (data: Todo) => void }>,
     ): void {
         if (!prevProps.todo) {
-            this.setState(() => this.props.todo as Omit<Todo, '_id'>);
+            this.setState(() => this.props.todo as Todo);
         }
     }
 
@@ -99,6 +106,7 @@ class TodoForm extends React.Component<
             priority: this.state.priority,
             duration: this.state.duration,
             date: this.state.date,
+            _id: this.state._id,
         };
         this.props.onSubmit(data);
     }

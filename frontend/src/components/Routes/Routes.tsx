@@ -2,7 +2,7 @@ import React from 'react';
 import './Routes.scss';
 import { Switch, Route } from 'react-router-dom';
 import Home from 'components/Home/Home';
-import Todos from 'containers/Todos/Todos';
+import TodosWrapper from 'containers/TodosWrapper/TodosWrapper';
 import Register from 'containers/Register/Register';
 import Login from 'containers/Login/Login';
 import AddTodo from 'containers/AddTodo/AddTodo';
@@ -16,7 +16,7 @@ const Routes: React.FC = () => {
                 <Home />
             </PrivateRoute>
             <PrivateRoute path="/todos">
-                <Todos />
+                <TodosWrapper />
             </PrivateRoute>
             <PrivateRoute path="/add-todo">
                 <AddTodo />

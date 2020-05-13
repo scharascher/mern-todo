@@ -2,29 +2,26 @@ import React, { useEffect, useState } from 'react';
 import './AddTodo.scss';
 import TodoForm from 'containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
-import { Todo } from 'helpers/TodoHelper';
+import { Todo } from 'helpers/Todo';
 import Alert from 'components/Alert/Alert';
-import Api from 'helpers/api';
 import Cookies from 'js-cookie';
+import { addTodo } from 'actions/todos';
+import { connect } from 'react-redux';
 
-const AddTodo: React.FC<{}> = () => {
-    let userId;
+const AddTodo: React.FC<any> = ({ dispatch }) => {
     const [open, setOpen] = useState(false);
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
-        userId = Cookies.get('userId');
+        setUserId(Cookies.get('userId') || '');
         if (!userId) {
             console.error('userId unknown');
         }
-    }, []);
+    }, [userId]);
 
     const onSubmit = (data: Omit<Todo, '_id'>): void => {
         setOpen(true);
-        Api.authorizedRequest('todos', 'PUT', data).then((data) => {
-            if (data.success) {
-                setOpen(true);
-            }
-        });
+        dispatch(addTodo(data));
     };
 
     return (
@@ -40,4 +37,4 @@ const AddTodo: React.FC<{}> = () => {
     );
 };
 
-export default AddTodo;
+export default connect()(AddTodo);
