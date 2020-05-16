@@ -9,6 +9,15 @@ import { editTodo, fetchTodosIfNeeded } from 'actions/todos';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+const mapStateToProps = (state: any, ownProps: any) => {
+    const todos = state.todos?.items || [];
+    const id = ownProps.match?.params?.id;
+    const todo = todos.find((todo: Todo) => todo._id === id);
+    return {
+        todo,
+    };
+};
+
 const EditTodo: React.FC<any> = ({ dispatch, todo }) => {
     const [open, setOpen] = useState<boolean>(false);
 
@@ -35,15 +44,6 @@ const EditTodo: React.FC<any> = ({ dispatch, todo }) => {
             </div>
         </Container>
     );
-};
-
-const mapStateToProps = (state: any, ownProps: any) => {
-    const todos = state.todos?.items || [];
-    const id = ownProps.match?.params?.id;
-    const todo = todos.find((todo: Todo) => todo._id === id);
-    return {
-        todo,
-    };
 };
 
 export default withRouter(connect(mapStateToProps)(EditTodo));

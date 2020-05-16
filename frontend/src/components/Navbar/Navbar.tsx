@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import LogoutButton from 'containers/LogoutButton/LogoutButton';
-import Cookies from 'js-cookie';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -23,39 +23,50 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ isAuthenticated: boolean }> = ({ isAuthenticated }) => {
     const classes = useStyles();
 
-    return Cookies.get('userId') ? (
-        <>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link to="/todos">Todos</Link>&nbsp;
-                        <Link to="/add-todo">Add todo</Link>&nbsp;
-                        <Link to="/user-info">User info</Link>
-                    </Typography>
-                    <LogoutButton />
-                </Toolbar>
-            </AppBar>
-        </>
-    ) : (
-        <>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link to="/">Home</Link>&nbsp;
-                    </Typography>
-                    <Link to="/register">
-                        <Button variant="contained">Register</Button>
-                    </Link>
-                    <Link to="/login">
-                        <Button variant="contained">Login</Button>
-                    </Link>
-                </Toolbar>
-            </AppBar>
-        </>
+    const getViewByIsAuthenticated = () => {
+        switch (isAuthenticated) {
+            case true:
+                return (
+                    <>
+                        <Typography variant="h6" className={classes.title}>
+                            <Link to="/todos">Todos</Link>&nbsp;
+                            <Link to="/add-todo">Add todo</Link>&nbsp;
+                            <Link to="/user-info">User info</Link>
+                        </Typography>
+                        <LogoutButton />
+                    </>
+                );
+            case false:
+                return (
+                    <>
+                        <Typography variant="h6" className={classes.title}>
+                            <Link to="/">Home</Link>&nbsp;
+                        </Typography>
+                        <Link to="/register">
+                            <Button variant="contained">Register</Button>
+                        </Link>
+                        <Link to="/login">
+                            <Button variant="contained">Login</Button>
+                        </Link>
+                    </>
+                );
+            default:
+                return null;
+        }
+    };
+
+    return (
+        <AppBar position="static">
+            <Toolbar>{getViewByIsAuthenticated()}</Toolbar>
+        </AppBar>
     );
 };
 
-export default Navbar;
+const mapStateToProps = (state: any) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Navbar);

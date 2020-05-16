@@ -1,22 +1,32 @@
 import React from 'react';
 import './PrivateRoute.scss';
 import { Route, Redirect } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { connect } from 'react-redux';
 
-const PrivateRoute: React.FC<any> = ({ children, ...rest }) => {
-    const render = ({ location }: { location: string }): React.ReactElement =>
-        Cookies.get('userId') ? (
-            children
-        ) : (
-            <Redirect
-                to={{
-                    pathname: '/login',
-                    state: { from: location },
-                }}
-            />
-        );
+interface Props {
+    isAuthenticated: boolean;
+}
+
+const PrivateRoute: React.FC<Props & any> = ({ isAuthenticated, children, ...rest }) => {
+    const render = ({ location }: { location: string }): React.ReactElement => {
+        if (isAuthenticated) {
+            return children;
+        } else if (isAuthenticated === false) {
+            return (
+                <Redirect
+                    to={{
+                        pathname: '/login',
+                        state: { from: location },
+                    }}
+                />
+            );
+        }
+        return <></>;
+    };
 
     return <Route {...rest} render={render} />;
 };
 
-export default PrivateRoute;
+const mapStateToProps = (state: any, props: any) => state.auth;
+
+export default connect(mapStateToProps)(PrivateRoute);

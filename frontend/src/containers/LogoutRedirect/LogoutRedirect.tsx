@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './LogoutRedirect.scss';
 import Api from 'helpers/api';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setIsAuth } from '../../actions/auth';
 import Cookies from 'js-cookie';
 
-const LogoutRedirect: React.FC = () => {
+const LogoutRedirect: React.FC<any> = ({ dispatch }) => {
     const [success, setSuccess] = useState<boolean>(false);
 
     useEffect(() => {
@@ -12,11 +14,12 @@ const LogoutRedirect: React.FC = () => {
             .then(() => {
                 setSuccess(true);
                 Cookies.remove('userId');
+                dispatch(setIsAuth(false));
             })
             .catch();
-    }, []);
+    }, [dispatch]);
 
     return <>{success && <Redirect to="/" />}</>;
 };
 
-export default LogoutRedirect;
+export default connect()(LogoutRedirect);

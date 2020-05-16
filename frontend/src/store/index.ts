@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
 export default () => {
     return createStore(
         rootReducer,
-        { todos: null },
+        { todos: null, auth: { isAuthenticated: null, userId: ''} },
         composeWithDevTools(applyMiddleware(...middleware)),
     );
 };

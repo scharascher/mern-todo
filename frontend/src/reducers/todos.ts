@@ -6,38 +6,55 @@ import {
     SAVE_TODOS,
 } from 'actions/todos';
 import { Todo } from '../helpers/Todo';
+import createReducer from '../helpers/createReducer';
 
-export default function (state: Record<string, any> = {}, action: any): any {
+const getNewState = (state: any) => {
     const newState = { ...state };
     if (!newState.items) {
         newState.items = [];
     }
-    switch (action.type) {
-        case ADD_TODO_SUCCESS:
-            newState.items.push(action.todo);
-            return newState;
-        case EDIT_TODO_SUCCESS:
-            const index = newState.items.findIndex((item: Todo) => item._id === action._id);
-            if (index > -1) {
-                newState.item[index] = action.todo;
-            }
-            return newState;
-        case LOAD_TODOS:
-            newState.isFetching = true;
-            return newState;
-        case SAVE_TODOS:
-            newState.isFetching = false;
-            newState.lastUpdated = action.lastUpdated;
-            newState.items = action.items;
-            return newState;
-        case DELETE_TODO_SUCCESS:
-            newState.items.splice(
-                newState.items.findIndex((item: Todo) => item._id === action._id),
-                1,
-            );
-            newState.items = [...newState.items];
-            return newState;
-        default:
-            return state;
+    return newState;
+};
+
+const addTodoSuccess = (state: any, action: any) => {
+    const newState = getNewState(state);
+    newState.items.push(action.todo);
+    return newState;
+};
+const editTodoSuccess = (state: any, action: any) => {
+    const newState = getNewState(state);
+    const index = newState.items.findIndex((item: Todo) => item._id === action._id);
+    if (index > -1) {
+        newState.item[index] = action.todo;
     }
-}
+    return newState;
+};
+const deleteTodoSuccess = (state: any, action: any) => {
+    const newState = getNewState(state);
+    newState.items.splice(
+        newState.items.findIndex((item: Todo) => item._id === action._id),
+        1,
+    );
+    newState.items = [...newState.items];
+    return newState;
+};
+const loadTodos = (state: any, action: any) => {
+    const newState = getNewState(state);
+    newState.isFetching = true;
+    return newState;
+};
+const saveTodos = (state: any, action: any) => {
+    const newState = getNewState(state);
+    newState.isFetching = false;
+    newState.lastUpdated = action.lastUpdated;
+    newState.items = action.items;
+    return newState;
+};
+
+export default createReducer(null, {
+    [ADD_TODO_SUCCESS]: addTodoSuccess,
+    [EDIT_TODO_SUCCESS]: editTodoSuccess,
+    [LOAD_TODOS]: loadTodos,
+    [SAVE_TODOS]: saveTodos,
+    [DELETE_TODO_SUCCESS]: deleteTodoSuccess,
+});

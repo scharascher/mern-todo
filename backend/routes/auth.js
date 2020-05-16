@@ -2,14 +2,15 @@ const routes = require('express').Router();
 const User = require('../models/user.model');
 // const Joi = require('@hapi/joi');
 const passport = require('passport');
-const isLoggedIn = require('../utils/isLoggedIn');
 
 // const userSchema = Joi.object().keys({
 //     username: Joi.string().required(),
 //     password: Joi.string().required(), // .regex(/^[a-zA-Z0-9]{6,30}$/)
 //     confirmationPassword: Joi.any().valid(Joi.ref('password')).required(),
 // });
-routes.route('/checkAuth').post(isLoggedIn);
+routes.route('/checkAuth').get((req, res) => {
+    return res.json(req.isAuthenticated());
+});
 
 routes.route('/login').post((req, res, next) => {
     passport.authenticate('local', (err, user) => {
