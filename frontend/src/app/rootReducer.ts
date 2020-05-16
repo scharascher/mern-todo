@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import todos from 'features/todos/todosReducers';
-import auth from 'features/auth/authReducers';
+import todos from 'features/todos/todos';
+import auth from 'features/auth/auth';
 
 export default combineReducers({
-    todos,
-    auth,
+    todos: todos.reducer,
+    auth: auth.reducer,
 });

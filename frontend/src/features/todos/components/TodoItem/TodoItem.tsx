@@ -22,6 +22,7 @@ const TodoItem: React.FC<{ item: Todo }> = ({ item }) => {
             </Typography>
 
             <Typography variant="caption" display="block" gutterBottom>
+                {item._id}
                 <Link to={`/edit-todo/${item._id}`}>Edit</Link>
                 <DeleteTodoLink _id={item._id} />
             </Typography>

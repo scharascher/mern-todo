@@ -5,16 +5,18 @@ import { Container } from '@material-ui/core';
 import { Todo } from 'features/todos/Todo';
 import Alert from 'common/components/Alert/Alert';
 import { Link } from 'react-router-dom';
-import { editTodo, fetchTodosIfNeeded } from 'features/todos/todosActions';
+import { editTodo, fetchTodosIfNeeded } from 'features/todos/todosEffects';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-const mapStateToProps = (state: any, ownProps: any) => {
-    const todos = state.todos?.items || [];
-    const id = ownProps.match?.params?.id;
-    const todo = todos.find((todo: Todo) => todo._id === id);
+const getTodoByMatchId = (state: any, props: any) => {
+    const id = props.match?.params?.id;
+    return state.todos.items.find((todo: Todo) => todo._id === id);
+};
+
+const mapStateToProps = (state: any, props: any) => {
     return {
-        todo,
+        todo: getTodoByMatchId(state, props),
     };
 };
 
@@ -38,7 +40,7 @@ const EditTodo: React.FC<any> = ({ dispatch, todo }) => {
             <Link to="/todos">Back to todos</Link>
             <div>
                 <TodoForm onSubmit={onSubmit} todo={todo} />
-                <Alert open={open} setOpen={setOpen} severity="success" autoHideDuration={4000}>
+                <Alert open={open} setOpen={setOpen} severity="success" autoHideDuration={2000}>
                     Form edited successfully!
                 </Alert>
             </div>

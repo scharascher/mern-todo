@@ -27,6 +27,8 @@ const PrivateRoute: React.FC<Props & any> = ({ isAuthenticated, children, ...res
     return <Route {...rest} render={render} />;
 };
 
-const mapStateToProps = (state: any, props: any) => state.auth;
+const mapStateToProps = (state: any) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
 
 export default connect(mapStateToProps)(PrivateRoute);

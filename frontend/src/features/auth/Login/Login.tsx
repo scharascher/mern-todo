@@ -3,8 +3,8 @@ import 'features/auth/Login/Login.scss';
 import Api from 'common/helpers/api';
 import LoginForm, { LoginData } from 'features/auth/LoginForm/LoginForm';
 import { useHistory, useLocation } from 'react-router-dom';
-import { setIsAuth } from 'features/auth/authActions';
 import { connect } from 'react-redux';
+import auth from 'features/auth/auth';
 
 const Login: React.FC<any> = ({ dispatch }) => {
     const history = useHistory();
@@ -16,7 +16,7 @@ const Login: React.FC<any> = ({ dispatch }) => {
 
     const handleSubmit = (data: LoginData): void => {
         Api.authorizedRequest('login', 'POST', data).then(() => {
-            dispatch(setIsAuth(true));
+            dispatch(auth.actions.setAuthenticated(true));
             history.replace(from);
         });
     };

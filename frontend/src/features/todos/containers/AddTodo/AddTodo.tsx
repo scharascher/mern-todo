@@ -4,7 +4,7 @@ import TodoForm from 'features/todos/containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
 import { Todo } from 'features/todos/Todo';
 import Alert from 'common/components/Alert/Alert';
-import { addTodo } from 'features/todos/todosActions';
+import { addTodo } from 'features/todos/todosEffects';
 import { connect } from 'react-redux';
 
 const AddTodo: React.FC<any> = ({ dispatch }) => {
@@ -20,7 +20,7 @@ const AddTodo: React.FC<any> = ({ dispatch }) => {
             <h2>Add todo</h2>
             <div>
                 <TodoForm onSubmit={onSubmit} />
-                <Alert open={open} setOpen={setOpen} severity="success" autoHideDuration={4000}>
+                <Alert open={open} setOpen={setOpen} severity="success" autoHideDuration={2000}>
                     Form added successfully!
                 </Alert>
             </div>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import 'features/todos/containers/DeleteTodo/DeleteTodo.scss';
 import { connect } from 'react-redux';
-import { deleteTodo } from 'features/todos/todosActions';
+import { deleteTodo } from 'features/todos/todosEffects';
 
 const DeleteTodo: React.FC<any> = ({ dispatch, _id }) => {
     useEffect(() => {

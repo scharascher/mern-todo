@@ -1,30 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'features/todos/containers/TodosWrapper/TodosWrapper.scss';
 import Todos from 'features/todos/components/Todos/Todos';
 import { connect } from 'react-redux';
-import { fetchTodosIfNeeded } from 'features/todos/todosActions';
+import { fetchTodosIfNeeded } from 'features/todos/todosEffects';
 
-class TodosWrapper extends React.Component<any, any> {
-    componentDidMount(): void {
-        this.props.dispatch(fetchTodosIfNeeded());
-    }
+const TodosWrapper: React.FC<any> = ({ dispatch, items, isFetching }) => {
+    useEffect(() => {
+        dispatch(fetchTodosIfNeeded());
+    });
 
-    render(): React.ReactNode {
-        return <Todos todos={this.props.todos} isFetching={this.props.isFetching} />;
-    }
-}
+    return <Todos todos={items} isFetching={isFetching} />;
+};
 
 const mapStateToProps = (state: any) => {
-    const { isFetching, lastUpdated, items: todos } = state.todos || {
-        isFetching: true,
-        items: [],
-    };
-
-    return {
-        todos,
-        isFetching,
-        lastUpdated,
-    };
+    return state.todos;
 };
 
 export default connect(mapStateToProps)(TodosWrapper);

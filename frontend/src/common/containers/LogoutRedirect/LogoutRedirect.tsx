@@ -3,8 +3,8 @@ import 'common/containers/LogoutRedirect/LogoutRedirect.scss';
 import Api from 'common/helpers/api';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setIsAuth } from 'features/auth/authActions';
 import Cookies from 'js-cookie';
+import auth from 'features/auth/auth';
 
 const LogoutRedirect: React.FC<any> = ({ dispatch }) => {
     const [success, setSuccess] = useState<boolean>(false);
@@ -14,7 +14,7 @@ const LogoutRedirect: React.FC<any> = ({ dispatch }) => {
             .then(() => {
                 setSuccess(true);
                 Cookies.remove('userId');
-                dispatch(setIsAuth(false));
+                dispatch(auth.actions.setAuthenticated(false));
             })
             .catch();
     }, [dispatch]);
