@@ -1,56 +1,29 @@
-import { Todo } from 'features/todos/Todo';
 import Api from 'common/helpers/api';
-import todos from 'features/todos/todos';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Todo } from 'features/todos/Todo';
 
-const fetchTodos = () => {
-    return (dispatch: any) => {
-        dispatch(todos.actions.load());
-        return Api.authorizedRequest('todos').then((json) =>
-            dispatch(todos.actions.save(json)),
-        );
-    };
-};
+export const fetchTodos = createAsyncThunk(
+    'todos/fetch',
+    async () => ({ items: await Api.authorizedRequest('todos'), lastUpdated: Date.now() }),
+    {
+        condition(arg, { getState }: any): boolean {
+            const { todos } = getState();
+            return !todos.isFetching && !todos.lastUpdated;
+        },
+    },
+);
 
-const shouldFetchTodos = (state: any) => {
-    return !state.todos?.isFetching && !state.todos?.lastUpdated;
-};
+export const addTodo = createAsyncThunk('todos/addTodo', async (todo: Omit<Todo, '_id'>) => {
+    const { _id } = await Api.authorizedRequest('todos', 'PUT', todo);
+    return { ...todo, _id };
+});
 
-export const addTodo = (todo: Omit<Todo, '_id'>) => {
-    return (dispatch: any) => {
-        return Api.authorizedRequest('todos', 'PUT', todo).then(({ _id }) => {
-            dispatch(todos.actions.addSuccess({ ...todo, _id }));
-        });
-    };
-};
+export const editTodo = createAsyncThunk('todos/editTodo', async (todo: Todo) => {
+    await Api.authorizedRequest(`todos/${todo._id}`, 'POST', todo);
+    return todo;
+});
 
-export const editTodo = (todo: Todo) => {
-    return (dispatch: any) => {
-        return Api.authorizedRequest(`todos/${todo._id}`, 'POST', todo).then(() => {
-            dispatch(todos.actions.editSuccess(todo));
-        });
-    };
-};
-
-// export const getTodo = (_id: string) => {
-//     return (dispatch: any) => {
-//         return Api.authorizedRequest(`todos/${_id}`).then((todo: Todo) => {
-//             dispatch(todos.actions.getSuccess(todo));
-//         });
-//     };
-// };
-
-export const deleteTodo = (_id: string) => {
-    return (dispatch: any) => {
-        return Api.authorizedRequest(`todos/${_id}`, 'DELETE').then(() => {
-            dispatch(todos.actions.deleteSuccess(_id));
-        });
-    };
-};
-
-export const fetchTodosIfNeeded = () => {
-    return (dispatch: any, getState: any) => {
-        if (shouldFetchTodos(getState())) {
-            return dispatch(fetchTodos());
-        }
-    };
-};
+export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (_id: string) => {
+    await Api.authorizedRequest(`todos/${_id}`, 'DELETE');
+    return _id;
+});

@@ -5,9 +5,10 @@ import { Container } from '@material-ui/core';
 import { Todo } from 'features/todos/Todo';
 import Alert from 'common/components/Alert/Alert';
 import { Link } from 'react-router-dom';
-import { editTodo, fetchTodosIfNeeded } from 'features/todos/todosEffects';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { editTodo } from 'features/todos/todosEffects';
+import { fetchTodos } from 'features/todos/todosEffects';
 
 const getTodoByMatchId = (state: any, props: any) => {
     const id = props.match?.params?.id;
@@ -25,7 +26,7 @@ const EditTodo: React.FC<any> = ({ dispatch, todo }) => {
 
     useEffect(() => {
         if (!todo) {
-            dispatch(fetchTodosIfNeeded());
+            dispatch(fetchTodos());
         }
     });
 

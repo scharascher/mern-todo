@@ -4,8 +4,8 @@ import TodoForm from 'features/todos/containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
 import { Todo } from 'features/todos/Todo';
 import Alert from 'common/components/Alert/Alert';
-import { addTodo } from 'features/todos/todosEffects';
 import { connect } from 'react-redux';
+import { addTodo } from 'features/todos/todosEffects';
 
 const AddTodo: React.FC<any> = ({ dispatch }) => {
     const [open, setOpen] = useState(false);

@@ -1,10 +1,7 @@
 import Api from 'common/helpers/api';
-import auth from 'features/auth/auth';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAuthObject } from 'features/auth/authHelper';
 
-export const checkAuth = () => {
-    return (dispatch: any) => {
-        return Api.authorizedRequest('checkAuth', 'GET').then((isAuthenticated: boolean) => {
-            dispatch(auth.actions.setAuthenticated(isAuthenticated));
-        });
-    };
-};
+export const checkAuth = createAsyncThunk('checkAuth', async () => {
+    return createAuthObject(await Api.authorizedRequest('checkAuth'));
+});

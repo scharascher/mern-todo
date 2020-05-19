@@ -1,18 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Cookies from 'js-cookie';
+import { checkAuth } from 'features/auth/authEffects';
+import { prepareSetAuthenticated, setAuthenticatedReducer } from 'features/auth/authHelper';
+
+export const setAuthenticated = {
+    reducer: setAuthenticatedReducer,
+    prepare: prepareSetAuthenticated,
+};
 
 export default createSlice({
     name: 'auth',
     initialState: { isAuthenticated: null, userId: '' },
     reducers: {
-        setAuthenticated: {
-            reducer: (state: any, action: any) => action.payload,
-            prepare: (isAuthenticated: boolean) => ({
-                payload: {
-                    isAuthenticated,
-                    userId: isAuthenticated ? Cookies.get('userId') : '',
-                },
-            }),
-        },
+        setAuthenticated,
+    },
+    extraReducers: (builder) => {
+        builder.addCase(checkAuth.fulfilled, setAuthenticatedReducer);
     },
 });

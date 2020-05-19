@@ -1,5 +1,6 @@
 import { Todo } from 'features/todos/Todo';
 import { createSlice } from '@reduxjs/toolkit';
+import { addTodo, deleteTodo, editTodo, fetchTodos } from 'features/todos/todosEffects';
 
 const addTodoSuccess = (state: any, action: any) => {
     state.items.push(action.payload);
@@ -27,20 +28,13 @@ const saveTodos = (state: any, action: any) => {
 
 export default createSlice({
     name: 'todos',
-    initialState: { items: [], isFetched: false },
-    reducers: {
-        addSuccess: addTodoSuccess,
-        editSuccess: editTodoSuccess,
-        load: loadTodos,
-        save: {
-            reducer: saveTodos,
-            prepare: (todos: Todo[]) => ({
-                payload: {
-                    items: todos,
-                    lastUpdated: Date.now(),
-                },
-            }),
-        },
-        deleteSuccess: deleteTodoSuccess,
+    initialState: { items: [], isFetching: false },
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(addTodo.fulfilled, addTodoSuccess);
+        builder.addCase(editTodo.fulfilled, editTodoSuccess);
+        builder.addCase(deleteTodo.fulfilled, deleteTodoSuccess);
+        builder.addCase(fetchTodos.fulfilled, saveTodos);
+        builder.addCase(fetchTodos.pending, loadTodos);
     },
 });
