@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import 'features/todos/containers/TodosWrapper/TodosWrapper.scss';
 import Todos from 'features/todos/components/Todos/Todos';
-import { connect } from 'react-redux';
+import { connect, DispatchProp } from 'react-redux';
 import { fetchTodos } from 'features/todos/todosEffects';
+import { TodosState, TodosStateType } from 'features/todos/todos';
+import { RootState } from 'app/rootReducer';
 
-const TodosWrapper: React.FC<any> = ({ dispatch, items, isFetching }) => {
+type Props = Omit<TodosStateType, 'lastUpdated'>;
+
+const TodosWrapper: React.FC<Props & DispatchProp<any>> = ({ dispatch, items, isFetching }) => {
     useEffect(() => {
         dispatch(fetchTodos());
     });
@@ -12,7 +16,7 @@ const TodosWrapper: React.FC<any> = ({ dispatch, items, isFetching }) => {
     return <Todos todos={items} isFetching={isFetching} />;
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState): TodosState => {
     return state.todos;
 };
 

@@ -1,13 +1,14 @@
 import Api from 'common/helpers/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Todo } from 'features/todos/Todo';
+import { RootState } from 'app/rootReducer';
 
 export const fetchTodos = createAsyncThunk(
     'todos/fetch',
     async () => ({ items: await Api.authorizedRequest('todos'), lastUpdated: Date.now() }),
     {
-        condition(arg, { getState }: any): boolean {
-            const { todos } = getState();
+        condition(arg, { getState }): boolean {
+            const { todos } = getState() as RootState;
             return !todos.isFetching && !todos.lastUpdated;
         },
     },

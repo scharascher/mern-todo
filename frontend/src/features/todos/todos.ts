@@ -1,34 +1,50 @@
 import { Todo } from 'features/todos/Todo';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { addTodo, deleteTodo, editTodo, fetchTodos } from 'features/todos/todosEffects';
 
-const addTodoSuccess = (state: any, action: any) => {
+export interface TodosStateType {
+    items: Todo[];
+    isFetching: boolean;
+    lastUpdated?: number | undefined;
+}
+
+export type TodosState = Readonly<TodosStateType>;
+
+const initialState: TodosState = {
+    items: [],
+    isFetching: false,
+};
+
+const addTodoSuccess = (state: TodosStateType, action: PayloadAction<Todo>): void => {
     state.items.push(action.payload);
 };
-const editTodoSuccess = (state: any, action: any) => {
+const editTodoSuccess = (state: TodosStateType, action: PayloadAction<Todo>): void => {
     const index = state.items.findIndex((item: Todo) => item._id === action.payload._id);
     if (index > -1) {
         state.items[index] = action.payload;
     }
 };
-const deleteTodoSuccess = (state: any, action: any) => {
+const deleteTodoSuccess = (state: TodosStateType, action: PayloadAction<string>): void => {
     state.items.splice(
         state.items.findIndex((item: Todo) => item._id === action.payload),
         1,
     );
 };
-const loadTodos = (state: any) => {
+const loadTodos = (state: TodosStateType): void => {
     state.isFetching = true;
 };
-const saveTodos = (state: any, action: any) => {
+const saveTodos = (
+    state: TodosStateType,
+    action: PayloadAction<{ items: Todo[]; lastUpdated: number }>,
+): void => {
     state.isFetching = false;
-    state.lastUpdated = action.payload.lastUpdated;
-    state.items = action.payload.items;
+    state.lastUpdated = action.payload.lastUpdated || undefined;
+    state.items = action.payload.items || [];
 };
 
 export default createSlice({
     name: 'todos',
-    initialState: { items: [], isFetching: false },
+    initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(addTodo.fulfilled, addTodoSuccess);

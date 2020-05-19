@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import LogoutButton from 'common/containers/LogoutButton/LogoutButton';
 import { connect } from 'react-redux';
+import { RootState } from 'app/rootReducer';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -23,10 +24,14 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Navbar: React.FC<{ isAuthenticated: boolean }> = ({ isAuthenticated }) => {
+interface Props {
+    isAuthenticated: boolean | undefined;
+}
+
+const Navbar: React.FC<Props> = ({ isAuthenticated }) => {
     const classes = useStyles();
 
-    const getViewByIsAuthenticated = () => {
+    const getViewByIsAuthenticated = (): React.ReactNode => {
         switch (isAuthenticated) {
             case true:
                 return (
@@ -64,7 +69,7 @@ const Navbar: React.FC<{ isAuthenticated: boolean }> = ({ isAuthenticated }) => 
     );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState): Props => ({
     isAuthenticated: state.auth.isAuthenticated,
 });
 

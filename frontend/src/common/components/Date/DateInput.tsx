@@ -3,16 +3,18 @@ import 'common/components/Date/DateInput.scss';
 import FormControl from '@material-ui/core/FormControl';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
-const DateInput: React.FC<{
+interface Props {
     id?: string;
     placeholder?: string;
     type?: string;
     value: number;
     onChange: (date: MaterialUiPickersDate, value: string | null | undefined) => void;
-}> = (props) => {
+}
+
+const DateInput: React.FC<Props> = (props) => {
     return (
         <FormControl style={{ width: '100%' }} margin="normal">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>

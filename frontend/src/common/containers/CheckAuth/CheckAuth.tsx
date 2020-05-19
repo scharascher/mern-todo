@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import 'common/containers/CheckAuth/CheckAuth.scss';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { checkAuth } from 'features/auth/authEffects';
 
-const CheckAuth: React.FC<any> = ({ dispatch }) => {
+const CheckAuth: React.FC = () => {
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(checkAuth());
     });
@@ -11,4 +12,4 @@ const CheckAuth: React.FC<any> = ({ dispatch }) => {
     return <></>;
 };
 
-export default connect()(CheckAuth);
+export default CheckAuth;

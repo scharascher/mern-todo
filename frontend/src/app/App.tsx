@@ -4,10 +4,8 @@ import 'app/App.scss';
 import Navbar from 'common/components/Navbar/Navbar';
 import Routes from 'common/components/Routes/Routes';
 import { Provider } from 'react-redux';
-import configureStore from 'app/store';
 import CheckAuth from 'common/containers/CheckAuth/CheckAuth';
-
-const store = configureStore();
+import store from 'app/store';
 
 const App: React.FC = () => {
     return (

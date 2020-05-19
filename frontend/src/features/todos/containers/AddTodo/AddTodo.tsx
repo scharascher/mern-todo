@@ -4,12 +4,12 @@ import TodoForm from 'features/todos/containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
 import { Todo } from 'features/todos/Todo';
 import Alert from 'common/components/Alert/Alert';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addTodo } from 'features/todos/todosEffects';
 
-const AddTodo: React.FC<any> = ({ dispatch }) => {
+const AddTodo: React.FC = () => {
     const [open, setOpen] = useState(false);
-
+    const dispatch = useDispatch();
     const onSubmit = (data: Omit<Todo, '_id'>): void => {
         setOpen(true);
         dispatch(addTodo(data));
@@ -28,4 +28,4 @@ const AddTodo: React.FC<any> = ({ dispatch }) => {
     );
 };
 
-export default connect()(AddTodo);
+export default AddTodo;

@@ -1,17 +1,18 @@
-import rootReducer from 'app/rootReducer';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import rootReducer, { RootState } from 'app/rootReducer';
+import { configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { Action } from 'typesafe-actions';
 
-const middleware: any[] = [];
-// if (process.env.NODE_ENV !== 'production') {
-//     middleware.push(
-//         createLogger({
-//
-//         }),
-//     );
-// }
-export default () => {
-    return configureStore({
-        reducer: rootReducer,
-        middleware: [...getDefaultMiddleware(), ...middleware],
+const store = configureStore({
+    reducer: rootReducer,
+});
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+    module.hot.accept('./rootReducer', () => {
+        const newRootReducer = require('./rootReducer').default;
+        store.replaceReducer(newRootReducer);
     });
-};
+}
+
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
+export type AppDispatch = typeof store.dispatch;
+export default store;

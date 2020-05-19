@@ -1,14 +1,16 @@
 import React from 'react';
 import 'common/components/PrivateRoute/PrivateRoute.scss';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { RootState } from 'app/rootReducer';
+
 interface Props {
-    isAuthenticated: boolean;
+    isAuthenticated: boolean | undefined;
 }
 
 const PrivateRoute: React.FC<Props & any> = ({ isAuthenticated, children, ...rest }) => {
-    const render = ({ location }: { location: string }): React.ReactElement => {
+    const render = ({ location }: RouteComponentProps): React.ReactNode => {
         if (isAuthenticated) {
             return children;
         } else if (isAuthenticated === false) {
@@ -27,7 +29,7 @@ const PrivateRoute: React.FC<Props & any> = ({ isAuthenticated, children, ...res
     return <Route {...rest} render={render} />;
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState): Props => ({
     isAuthenticated: state.auth.isAuthenticated,
 });
 

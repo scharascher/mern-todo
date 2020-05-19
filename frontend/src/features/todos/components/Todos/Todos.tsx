@@ -6,7 +6,12 @@ import { Container } from '@material-ui/core';
 import { Todo } from 'features/todos/Todo';
 import { Link } from 'react-router-dom';
 
-const Todos: React.FC<{ todos: Todo[]; isFetching: boolean }> = ({ todos, isFetching }) => {
+interface Props {
+    todos: Todo[];
+    isFetching: boolean;
+}
+
+const Todos: React.FC<Props> = ({ todos, isFetching }) => {
     return (
         <Container maxWidth="md">
             {isFetching ? (

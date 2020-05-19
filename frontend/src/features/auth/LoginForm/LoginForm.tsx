@@ -3,7 +3,11 @@ import 'features/auth/LoginForm/LoginForm.scss';
 import Submit from 'common/components/Submit/Submit';
 import Input from 'common/components/Input/Input';
 
-const LoginForm: React.FC<{ onSubmit: (data: LoginData) => void }> = ({ onSubmit, children }) => {
+interface Props {
+    onSubmit: (data: LoginData) => void;
+}
+
+const LoginForm: React.FC<Props> = ({ onSubmit, children }) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 

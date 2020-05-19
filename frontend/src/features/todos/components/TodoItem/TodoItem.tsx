@@ -5,7 +5,11 @@ import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import DeleteTodoLink from 'features/todos/components/DeleteTodoLink/DeleteTodoLink';
 
-const TodoItem: React.FC<{ item: Todo }> = ({ item }) => {
+interface Props {
+    item: Todo;
+}
+
+const TodoItem: React.FC<Props> = ({ item }) => {
     return (
         <div>
             <Typography variant="h4" gutterBottom>

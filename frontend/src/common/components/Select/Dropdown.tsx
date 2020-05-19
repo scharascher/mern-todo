@@ -14,9 +14,9 @@ const Dropdown: React.FC<{
     onChange: (e: React.ChangeEvent<any>) => void;
     value: DropdownValue;
 }> = (props) => {
-    const items = props.options.map((option: any) => {
+    const items = props.options.map((option: Option) => {
         return (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem key={`${option.value}`} value={`${option.value}`}>
                 {option.label}
             </MenuItem>
         );

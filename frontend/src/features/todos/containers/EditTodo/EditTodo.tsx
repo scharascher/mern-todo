@@ -2,26 +2,39 @@ import React, { useEffect, useState } from 'react';
 import 'features/todos/containers/EditTodo/EditTodo.scss';
 import TodoForm from 'features/todos/containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
-import { Todo } from 'features/todos/Todo';
 import Alert from 'common/components/Alert/Alert';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { editTodo } from 'features/todos/todosEffects';
-import { fetchTodos } from 'features/todos/todosEffects';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { connect, DispatchProp } from 'react-redux';
+import { editTodo, fetchTodos } from 'features/todos/todosEffects';
+import { Todo } from 'features/todos/Todo';
+import { RootState } from 'app/rootReducer';
 
-const getTodoByMatchId = (state: any, props: any) => {
+type TodoObj = {
+    todo: Todo | undefined;
+};
+
+type Props = TodoObj & DispatchProp<any> & RouteComponentProps<{ id: string }>;
+
+const getTodoByMatchId = (
+    state: RootState,
+    props: RouteComponentProps<{ id: string }>,
+): Todo | undefined => {
     const id = props.match?.params?.id;
     return state.todos.items.find((todo: Todo) => todo._id === id);
 };
 
-const mapStateToProps = (state: any, props: any) => {
+const mapStateToProps = (
+    state: RootState,
+    props: RouteComponentProps<{ id: string }>,
+): {
+    todo: Todo | undefined;
+} => {
     return {
         todo: getTodoByMatchId(state, props),
     };
 };
 
-const EditTodo: React.FC<any> = ({ dispatch, todo }) => {
+const EditTodo: React.FC<Props> = ({ dispatch, todo }) => {
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {

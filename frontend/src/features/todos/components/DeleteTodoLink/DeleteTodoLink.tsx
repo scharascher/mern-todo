@@ -3,7 +3,11 @@ import 'features/todos/components/DeleteTodoLink/DeleteTodoLink.scss';
 import Button from '@material-ui/core/Button';
 import DeleteTodo from 'features/todos/containers/DeleteTodo/DeleteTodo';
 
-const DeleteTodoLink: React.FC<any> = ({ _id }) => {
+interface Props {
+    _id: string;
+}
+
+const DeleteTodoLink: React.FC<Props> = ({ _id }) => {
     const [remove, setRemove] = useState<boolean>(false);
 
     return (
