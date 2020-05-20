@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 import 'features/todos/containers/TodosWrapper/TodosWrapper.scss';
 import Todos from 'features/todos/components/Todos/Todos';
-import { connect, DispatchProp } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodos } from 'features/todos/todosEffects';
-import { TodosState, TodosStateType } from 'features/todos/todos';
-import { RootState } from 'app/rootReducer';
+import { getTodos } from 'features/todos/todosSelector';
+import { getIsAuthenticated } from 'features/auth/authSelectors';
 
-type Props = Omit<TodosStateType, 'lastUpdated'>;
+const TodosWrapper: React.FC = () => {
+    const dispatch = useDispatch();
+    const { items, isFetching } = useSelector(getTodos);
+    const isAuthenticated = useSelector(getIsAuthenticated);
 
-const TodosWrapper: React.FC<Props & DispatchProp<any>> = ({ dispatch, items, isFetching }) => {
     useEffect(() => {
         dispatch(fetchTodos());
     });
 
+    if (!isAuthenticated == null) return null;
+
     return <Todos todos={items} isFetching={isFetching} />;
 };
 
-const mapStateToProps = (state: RootState): TodosState => {
-    return state.todos;
-};
-
-export default connect(mapStateToProps)(TodosWrapper);
+export default TodosWrapper;

@@ -4,38 +4,15 @@ import TodoForm from 'features/todos/containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
 import Alert from 'common/components/Alert/Alert';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { connect, DispatchProp } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editTodo, fetchTodos } from 'features/todos/todosEffects';
 import { Todo } from 'features/todos/Todo';
-import { RootState } from 'app/rootReducer';
+import { returnGetTodoById } from 'features/todos/todosSelector';
 
-type TodoObj = {
-    todo: Todo | undefined;
-};
-
-type Props = TodoObj & DispatchProp<any> & RouteComponentProps<{ id: string }>;
-
-const getTodoByMatchId = (
-    state: RootState,
-    props: RouteComponentProps<{ id: string }>,
-): Todo | undefined => {
-    const id = props.match?.params?.id;
-    return state.todos.items.find((todo: Todo) => todo._id === id);
-};
-
-const mapStateToProps = (
-    state: RootState,
-    props: RouteComponentProps<{ id: string }>,
-): {
-    todo: Todo | undefined;
-} => {
-    return {
-        todo: getTodoByMatchId(state, props),
-    };
-};
-
-const EditTodo: React.FC<Props> = ({ dispatch, todo }) => {
+const EditTodo: React.FC<RouteComponentProps<{ id: string }>> = (props) => {
     const [open, setOpen] = useState<boolean>(false);
+    const dispatch = useDispatch();
+    const todo = useSelector(returnGetTodoById(props.match.params.id));
 
     useEffect(() => {
         if (!todo) {
@@ -62,4 +39,4 @@ const EditTodo: React.FC<Props> = ({ dispatch, todo }) => {
     );
 };
 
-export default withRouter(connect(mapStateToProps)(EditTodo));
+export default withRouter(EditTodo);
