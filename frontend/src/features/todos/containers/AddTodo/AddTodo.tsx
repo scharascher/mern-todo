@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'features/todos/containers/AddTodo/AddTodo.scss';
 import TodoForm from 'features/todos/containers/TodoForm/TodoForm';
 import { Container } from '@material-ui/core';
-import { Todo } from 'features/todos/Todo';
+import { newTodo } from 'features/todos/Todo';
 import Alert from 'common/components/Alert/Alert';
 import { useDispatch } from 'react-redux';
 import { addTodo } from 'features/todos/todosEffects';
@@ -10,7 +10,7 @@ import { addTodo } from 'features/todos/todosEffects';
 const AddTodo: React.FC = () => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
-    const onSubmit = (data: Omit<Todo, '_id'>): void => {
+    const onSubmit = (data: newTodo): void => {
         setOpen(true);
         dispatch(addTodo(data));
     };

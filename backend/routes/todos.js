@@ -14,7 +14,7 @@ routes.route('/').put(async (req, res, next) => {
     const obj = await getTodoObjectByReq(req);
     const newTodo = new Todo(obj);
     handleRouteError(
-        newTodo.save().then(() => res.json({ _id: newTodo._id })),
+        newTodo.save().then(() => res.json(newTodo)),
         next,
     );
 });
@@ -37,7 +37,7 @@ routes.route('/:id').post((req, res, next) => {
             const obj = await getTodoObjectByReq(req);
             todo = Object.assign(todo, obj);
             handleRouteError(
-                todo.save().then(() => res.json()),
+                todo.save().then(() => res.json(todo)),
                 next,
             );
         }),

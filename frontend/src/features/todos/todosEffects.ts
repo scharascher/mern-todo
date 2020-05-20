@@ -1,6 +1,6 @@
 import Api from 'common/helpers/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Todo } from 'features/todos/Todo';
+import { newTodo } from 'features/todos/Todo';
 import { RootState } from 'app/rootReducer';
 
 export const fetchTodos = createAsyncThunk(
@@ -14,14 +14,12 @@ export const fetchTodos = createAsyncThunk(
     },
 );
 
-export const addTodo = createAsyncThunk('todos/addTodo', async (todo: Omit<Todo, '_id'>) => {
-    const { _id } = await Api.authorizedRequest('todos', 'PUT', todo);
-    return { ...todo, _id };
+export const addTodo = createAsyncThunk('todos/addTodo', async (todo: newTodo) => {
+    return await Api.authorizedRequest('todos', 'PUT', todo);
 });
 
-export const editTodo = createAsyncThunk('todos/editTodo', async (todo: Todo) => {
-    await Api.authorizedRequest(`todos/${todo._id}`, 'POST', todo);
-    return todo;
+export const editTodo = createAsyncThunk('todos/editTodo', async (todo: newTodo) => {
+    return await Api.authorizedRequest(`todos/${todo._id}`, 'POST', todo);
 });
 
 export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (_id: string) => {

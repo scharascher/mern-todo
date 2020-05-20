@@ -6,7 +6,7 @@ import { Option } from 'common/helpers/Option';
 import DateInput from 'common/components/Date/DateInput';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import Submit from 'common/components/Submit/Submit';
-import { Todo } from 'features/todos/Todo';
+import { newTodo, Todo } from 'features/todos/Todo';
 
 const types: Option[] = [
     {
@@ -30,10 +30,10 @@ const priorities: Option[] = [
 ];
 
 class TodoForm extends React.Component<
-    { todo?: null | Todo; onSubmit: (data: Todo) => void },
-    Todo
+    { todo?: null | Todo; onSubmit: (data: newTodo) => void },
+    newTodo
 > {
-    constructor(props: { todo?: null | Todo; onSubmit: (data: Todo) => void }) {
+    constructor(props: { todo?: null | Todo; onSubmit: (data: newTodo) => void }) {
         super(props);
         this.state = {
             priority: priorities[0].value as number,

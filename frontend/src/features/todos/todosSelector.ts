@@ -7,11 +7,13 @@ export function getTodos(state: RootState): TodosState {
 }
 
 export function getTodosItems(state: RootState): Todo[] {
-    return state.todos.items;
+    return Object.values(state.todos.items).sort((a, b) => {
+        return b.createdAt.getTime() - a.createdAt.getTime();
+    });
 }
 
 export function returnGetTodoById(_id: string) {
     return (state: RootState): Todo | undefined => {
-        return state.todos.items.find((todo: Todo) => todo._id === _id);
+        return state.todos.items[_id];
     };
 }

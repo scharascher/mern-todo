@@ -1,9 +1,10 @@
-import { Todo } from 'features/todos/Todo';
+import { ServerTodo, Todo } from 'features/todos/Todo';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { addTodo, deleteTodo, editTodo, fetchTodos } from 'features/todos/todosEffects';
 
 export interface TodosStateType {
-    items: Todo[];
+    items: Record<string, Todo>;
+    ids: string[];
     isFetching: boolean;
     lastUpdated?: number | undefined;
 }
@@ -11,35 +12,35 @@ export interface TodosStateType {
 export type TodosState = Readonly<TodosStateType>;
 
 const initialState: TodosState = {
-    items: [],
+    items: {},
+    ids: [],
     isFetching: false,
 };
 
-const addTodoSuccess = (state: TodosStateType, action: PayloadAction<Todo>): void => {
-    state.items.push(action.payload);
+const addTodoSuccess = (state: TodosStateType, action: PayloadAction<ServerTodo>): void => {
+    state.items[action.payload._id] = new Todo(action.payload);
 };
-const editTodoSuccess = (state: TodosStateType, action: PayloadAction<Todo>): void => {
-    const index = state.items.findIndex((item: Todo) => item._id === action.payload._id);
-    if (index > -1) {
-        state.items[index] = action.payload;
-    }
+const editTodoSuccess = (state: TodosStateType, action: PayloadAction<ServerTodo>): void => {
+    state.items[action.payload._id] = new Todo(action.payload);
 };
 const deleteTodoSuccess = (state: TodosStateType, action: PayloadAction<string>): void => {
-    state.items.splice(
-        state.items.findIndex((item: Todo) => item._id === action.payload),
-        1,
-    );
+    delete state.items[action.payload as string];
 };
 const loadTodos = (state: TodosStateType): void => {
     state.isFetching = true;
 };
 const saveTodos = (
     state: TodosStateType,
-    action: PayloadAction<{ items: Todo[]; lastUpdated: number }>,
+    action: PayloadAction<{ items: ServerTodo[]; lastUpdated: number }>,
 ): void => {
     state.isFetching = false;
     state.lastUpdated = action.payload.lastUpdated || undefined;
-    state.items = action.payload.items || [];
+    state.ids = action.payload.items.map((item) => item._id);
+    state.items =
+        action.payload.items?.reduce((acc: Record<string, Todo>, current: ServerTodo) => {
+            acc[current._id] = new Todo(current);
+            return acc;
+        }, {}) || {};
 };
 
 export default createSlice({
