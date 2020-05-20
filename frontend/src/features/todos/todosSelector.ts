@@ -8,7 +8,7 @@ export function getTodos(state: RootState): TodosState {
 
 export function getTodosItems(state: RootState): Todo[] {
     return Object.values(state.todos.items).sort((a, b) => {
-        return b.createdAt.getTime() - a.createdAt.getTime();
+        return b.createdAt - a.createdAt;
     });
 }
 
