@@ -66,9 +66,11 @@ app.use(passport.session());
 const todosRouter = require('./routes/todos');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const todoTypesRouter = require('./routes/todoTypes');
 app.use('/api/', authRouter);
 app.use('/api/todos', isLoggedIn, todosRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/todoTypes', todoTypesRouter);
 
 app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

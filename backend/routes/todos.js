@@ -10,8 +10,8 @@ routes.route('/').get((req, res, next) => {
     );
 });
 
-routes.route('/').put(async (req, res, next) => {
-    const obj = await getTodoObjectByReq(req);
+routes.route('/').put((req, res, next) => {
+    const obj = getTodoObjectByReq(req);
     const newTodo = new Todo(obj);
     handleRouteError(
         newTodo.save().then(() => res.json(newTodo)),
@@ -33,8 +33,8 @@ routes.route('/:id').delete((req, res, next) => {
 });
 routes.route('/:id').post((req, res, next) => {
     handleRouteError(
-        Todo.findById(req.params.id).then(async (todo) => {
-            const obj = await getTodoObjectByReq(req);
+        Todo.findById(req.params.id).then((todo) => {
+            const obj = getTodoObjectByReq(req);
             todo = Object.assign(todo, obj);
             handleRouteError(
                 todo.save().then(() => res.json(todo)),
@@ -46,20 +46,16 @@ routes.route('/:id').post((req, res, next) => {
 });
 module.exports = routes;
 
-async function getTodoObjectByReq(req) {
-    return new Promise((resolve) => {
-        TodoType.findOne({ name: req.body.type }).then((type) => {
-            resolve({
-                title: req.body.title,
-                description: req.body.description,
-                duration: Number(req.body.duration),
-                date: Number(req.body.date),
-                priority: Number(req.body.priority),
-                typeId: type._id,
-                ...getUserIdObjFromReq(req),
-            });
-        });
-    });
+function getTodoObjectByReq(req) {
+    return {
+        title: req.body.title,
+        description: req.body.description,
+        duration: Number(req.body.duration),
+        date: Number(req.body.date),
+        priority: Number(req.body.priority),
+        typeId: req.body.typeId,
+        ...getUserIdObjFromReq(req),
+    };
 }
 
 function getUserIdObjFromReq(req) {

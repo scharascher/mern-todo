@@ -3,7 +3,6 @@ export interface Todo {
     priority: number;
     title: string;
     description: string;
-    type: string;
     date: number; // timestamp
     updatedAt: number;
     createdAt: number;
@@ -11,4 +10,4 @@ export interface Todo {
     _id: string;
 }
 
-export type newTodo = Omit<Todo, 'updatedAt' | 'createdAt' | 'typeId'>;
+export type newTodo = Omit<Todo, 'updatedAt' | 'createdAt'>;

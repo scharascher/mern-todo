@@ -1,19 +1,23 @@
 import React from 'react';
 import 'common/components/Routes/Routes.scss';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from 'common/components/Home/Home';
-import TodosWrapper from 'features/todos/containers/TodosWrapper/TodosWrapper';
-import Register from 'features/auth/Register/Register';
-import Login from 'features/auth/Login/Login';
-import AddTodo from 'features/todos/containers/AddTodo/AddTodo';
-import EditTodo from 'features/todos/containers/EditTodo/EditTodo';
+import TodosWrapper from 'features/todos/containers/TodosWrapper';
+import Register from 'features/auth/containers/Register';
+import Login from 'features/auth/containers/Login';
+import AddTodo from 'features/todos/containers/AddTodo';
+import EditTodo from 'features/todos/containers/EditTodo';
 import PrivateRoute from 'common/components/PrivateRoute/PrivateRoute';
+import TodoTypesWrapper from 'features/todoTypes/containers/TodoTypesWrapper';
 
 const Routes: React.FC = () => {
     return (
         <Switch>
             <PrivateRoute path="/todos">
                 <TodosWrapper />
+            </PrivateRoute>
+            <PrivateRoute path="/todo-types">
+                <TodoTypesWrapper />
             </PrivateRoute>
             <PrivateRoute path="/add-todo">
                 <AddTodo />
