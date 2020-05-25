@@ -103,6 +103,7 @@ class TodoForm extends React.Component<
             date: this.state.date,
             _id: this.state._id,
         };
+
         this.props.onSubmit(data);
     }
 
