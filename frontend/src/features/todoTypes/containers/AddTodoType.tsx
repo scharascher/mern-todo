@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Alert from 'common/components/Alert';
 import { useDispatch } from 'react-redux';
 import TodoTypeForm from 'features/todoTypes/containers/TodoTypeForm';
-import { newTodoType } from 'features/todoTypes/TodoType';
+import { newTodoType } from 'types/TodoType';
 import { addTodoType } from 'features/todoTypes/todoTypesEffects';
 
 const AddTodoType: React.FC = () => {

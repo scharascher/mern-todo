@@ -1,17 +1,14 @@
 import React, { SyntheticEvent } from 'react';
 import Input from 'common/components/Input';
 import Submit from 'common/components/Submit';
-import { newTodoType, TodoType } from 'features/todoTypes/TodoType';
+import { newTodoType, TodoType } from 'types/TodoType';
 
 interface Props {
     todoType?: null | TodoType;
     onSubmit: (data: newTodoType) => void;
 }
 
-class TodoTypeForm extends React.Component<
-    Props,
-    newTodoType
-> {
+class TodoTypeForm extends React.Component<Props, newTodoType> {
     constructor(props: Props) {
         super(props);
         this.state = {

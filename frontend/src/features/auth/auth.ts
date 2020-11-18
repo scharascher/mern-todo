@@ -1,6 +1,4 @@
-import { CaseReducerWithPrepare, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { checkAuth } from 'features/auth/authEffects';
-import { prepareSetAuthenticated, setAuthenticatedReducer } from 'features/auth/authHelper';
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface AuthStateType {
     userId: string;
@@ -8,11 +6,6 @@ export interface AuthStateType {
 }
 
 export type AuthState = Readonly<AuthStateType>;
-
-const setAuthenticatedFn: CaseReducerWithPrepare<AuthState, PayloadAction<any>> = {
-    reducer: setAuthenticatedReducer,
-    prepare: prepareSetAuthenticated,
-};
 
 const initialState: AuthState = {
     userId: '',
@@ -23,10 +16,9 @@ const auth = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setAuthenticated: setAuthenticatedFn,
-    },
-    extraReducers: (builder) => {
-        builder.addCase(checkAuth.fulfilled, setAuthenticatedReducer);
+        setAuthenticated: (state, action: PayloadAction<AuthStateType>) => {
+            state = { ...action.payload };
+        },
     },
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Typography } from '@material-ui/core';
-import { TodoType } from 'features/todoTypes/TodoType';
+import { TodoType } from 'types/TodoType';
 import DeleteTodoTypeLink from 'features/todoTypes/components/DeleteTodoTypeLink';
 
 interface Props {

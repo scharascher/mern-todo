@@ -2,7 +2,7 @@ import React from 'react';
 import TodoList from 'features/todos/components/TodoList';
 import TodoFilter from 'features/todos/components/TodoFilter';
 import { Container } from '@material-ui/core';
-import { Todo } from 'features/todos/Todo';
+import { Todo } from 'types/Todo';
 import { Link } from 'react-router-dom';
 
 interface Props {

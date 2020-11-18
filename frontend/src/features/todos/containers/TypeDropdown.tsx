@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Dropdown from 'common/components/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTodoTypesOptions } from 'features/todoTypes/todoTypesSelector';
+import { getTodoTypesOptions } from 'features/todoTypes/todoTypesSelectors';
 import { fetchTodoTypes } from 'features/todoTypes/todoTypesEffects';
 
 interface Props {

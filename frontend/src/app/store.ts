@@ -1,9 +1,11 @@
 import rootReducer, { RootState } from 'app/rootReducer';
 import { configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { Action } from 'typesafe-actions';
+import logger from 'redux-logger';
 
 const store = configureStore({
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 if (process.env.NODE_ENV === 'development' && module.hot) {

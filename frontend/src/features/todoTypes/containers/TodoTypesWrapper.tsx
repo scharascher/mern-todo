@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIsAuthenticated } from 'features/auth/authSelectors';
 import TodoTypes from 'features/todoTypes/components/TodoTypes';
 import { fetchTodoTypes } from 'features/todoTypes/todoTypesEffects';
-import { getTodoTypes, getTodoTypesItems } from 'features/todoTypes/todoTypesSelector';
+import { getTodoTypes, getTodoTypesItems } from 'features/todoTypes/todoTypesSelectors';
 
 const TodoTypesWrapper: React.FC = () => {
     const dispatch = useDispatch();

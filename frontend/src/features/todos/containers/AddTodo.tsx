@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TodoForm from 'features/todos/containers/TodoForm';
 import { Container } from '@material-ui/core';
-import { newTodo } from 'features/todos/Todo';
+import { newTodo } from 'types/Todo';
 import Alert from 'common/components/Alert';
 import { useDispatch } from 'react-redux';
 import { addTodo } from 'features/todos/todosEffects';

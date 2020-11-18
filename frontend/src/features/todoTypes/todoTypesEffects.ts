@@ -1,7 +1,7 @@
 import Api from 'utils/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from 'app/rootReducer';
-import { newTodoType, TodoType } from 'features/todoTypes/TodoType';
+import { newTodoType, TodoType } from 'types/TodoType';
 
 function decodeTodoType(todoType: any): TodoType {
     return {

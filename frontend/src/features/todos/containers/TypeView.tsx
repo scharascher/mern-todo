@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { returnGetTodoTypeById } from 'features/todoTypes/todoTypesSelector';
+import { returnGetTodoTypeById } from 'features/todoTypes/todoTypesSelectors';
 
 interface Props {
     _id: string;

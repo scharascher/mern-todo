@@ -5,7 +5,7 @@ import { Option } from 'types/Option';
 import DateInput from 'common/components/DateInput';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import Submit from 'common/components/Submit';
-import { newTodo, Todo } from 'features/todos/Todo';
+import { newTodo, Todo } from 'types/Todo';
 import ManageType from 'features/todos/components/ManageType';
 import TypeDropdown from 'features/todos/containers/TypeDropdown';
 

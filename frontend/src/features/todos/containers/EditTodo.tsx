@@ -5,8 +5,8 @@ import Alert from 'common/components/Alert';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editTodo, fetchTodos } from 'features/todos/todosEffects';
-import { returnGetTodoById } from 'features/todos/todosSelector';
-import { newTodo } from 'features/todos/Todo';
+import { returnGetTodoById } from 'features/todos/todosSelectors';
+import { newTodo } from 'types/Todo';
 
 const EditTodo: React.FC<RouteComponentProps<{ id: string }>> = (props) => {
     const [open, setOpen] = useState<boolean>(false);

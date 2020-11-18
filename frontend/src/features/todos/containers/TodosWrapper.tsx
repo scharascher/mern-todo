@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Todos from 'features/todos/components/Todos';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodos } from 'features/todos/todosEffects';
-import { getTodos, getTodosItems } from 'features/todos/todosSelector';
+import { getTodos, getTodosItems } from 'features/todos/todosSelectors';
 import { getIsAuthenticated } from 'features/auth/authSelectors';
 import { fetchTodoTypes } from 'features/todoTypes/todoTypesEffects';
 

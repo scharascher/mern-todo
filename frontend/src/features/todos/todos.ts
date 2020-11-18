@@ -1,4 +1,4 @@
-import { Todo } from 'features/todos/Todo';
+import { Todo } from 'types/Todo';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { addTodo, deleteTodo, editTodo, fetchTodos } from 'features/todos/todosEffects';
 

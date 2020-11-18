@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TodoType } from 'features/todoTypes/TodoType';
-import { addTodoType, deleteTodoType, editTodoType, fetchTodoTypes } from 'features/todoTypes/todoTypesEffects';
+import { TodoType } from 'types/TodoType';
+import { addTodoType, deleteTodoType, editTodoType, fetchTodoTypes, } from 'features/todoTypes/todoTypesEffects';
 
 export interface TodoTypesStateType {
     items: Record<string, TodoType>;

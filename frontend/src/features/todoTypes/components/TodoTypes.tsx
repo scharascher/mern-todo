@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-import { TodoType } from 'features/todoTypes/TodoType';
+import { TodoType } from 'types/TodoType';
 import TodoTypeList from 'features/todoTypes/components/TodoTypeList';
 import AddTodoType from 'features/todoTypes/containers/AddTodoType';
 

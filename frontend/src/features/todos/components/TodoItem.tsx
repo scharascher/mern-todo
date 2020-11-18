@@ -1,5 +1,5 @@
 import React from 'react';
-import { Todo } from 'features/todos/Todo';
+import { Todo } from 'types/Todo';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import DeleteTodoLink from 'features/todos/components/DeleteTodoLink';
