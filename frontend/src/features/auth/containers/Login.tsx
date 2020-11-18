@@ -1,5 +1,5 @@
 import React from 'react';
-import Api from 'common/helpers/api';
+import Api from 'utils/api';
 import LoginForm, { LoginData } from 'features/auth/containers/LoginForm';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';

@@ -1,5 +1,4 @@
 import React from 'react';
-import 'common/components/Date/DateInput.scss';
 import FormControl from '@material-ui/core/FormControl';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';

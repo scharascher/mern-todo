@@ -1,5 +1,4 @@
 import React from 'react';
-import 'common/components/Input/Input.scss';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 

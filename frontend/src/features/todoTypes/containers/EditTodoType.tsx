@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Alert from 'common/components/Alert/Alert';
+import Alert from 'common/components/Alert';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { newTodoType, TodoType } from 'features/todoTypes/TodoType';

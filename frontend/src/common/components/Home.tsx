@@ -1,5 +1,4 @@
 import React from 'react';
-import 'common/components/Home/Home.scss';
 
 const Home: React.FC = () => {
     return (

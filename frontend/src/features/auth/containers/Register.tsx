@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Api from 'common/helpers/api';
+import Api from 'utils/api';
 import { Redirect } from 'react-router-dom';
 import LoginForm, { LoginData } from 'features/auth/containers/LoginForm';
 

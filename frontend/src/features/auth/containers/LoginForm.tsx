@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Submit from 'common/components/Submit/Submit';
-import Input from 'common/components/Input/Input';
+import Submit from 'common/components/Submit';
+import Input from 'common/components/Input';
 
 interface Props {
     onSubmit: (data: LoginData) => void;

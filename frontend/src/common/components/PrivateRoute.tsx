@@ -1,5 +1,4 @@
 import React from 'react';
-import 'common/components/PrivateRoute/PrivateRoute.scss';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getIsAuthenticated } from 'features/auth/authSelectors';

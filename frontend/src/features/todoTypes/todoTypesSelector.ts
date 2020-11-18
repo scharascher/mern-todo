@@ -1,7 +1,7 @@
 import { RootState } from 'app/rootReducer';
 import { TodoTypesState } from 'features/todoTypes/todoTypes';
 import { TodoType } from 'features/todoTypes/TodoType';
-import { Option } from 'common/helpers/Option';
+import { Option } from 'types/Option';
 
 export function getTodoTypes(state: RootState): TodoTypesState {
     return state.todoTypes;

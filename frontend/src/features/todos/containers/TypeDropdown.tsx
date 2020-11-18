@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Dropdown from 'common/components/Select/Dropdown';
+import Dropdown from 'common/components/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodoTypesOptions } from 'features/todoTypes/todoTypesSelector';
 import { fetchTodoTypes } from 'features/todoTypes/todoTypesEffects';

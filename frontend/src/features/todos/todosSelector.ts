@@ -1,19 +1,18 @@
 import { RootState } from 'app/rootReducer';
-import { TodosState } from 'features/todos/todos';
-import { Todo } from 'features/todos/Todo';
+import { createSelector } from '@reduxjs/toolkit';
 
-export function getTodos(state: RootState): TodosState {
+export function getTodos(state: RootState) {
     return state.todos;
 }
 
-export function getTodosItems(state: RootState): Todo[] {
-    return Object.values(state.todos.items).sort((a, b) => {
+export const getTodosItems = createSelector(getTodos, (todos) => {
+    return Object.values(todos.items).sort((a, b) => {
         return b.createdAt - a.createdAt;
     });
-}
+});
 
 export function returnGetTodoById(_id: string) {
-    return (state: RootState): Todo | undefined => {
-        return state.todos.items[_id];
-    };
+    return createSelector(getTodos, (todos) => {
+        return todos.items[_id];
+    });
 }

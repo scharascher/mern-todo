@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Alert from 'common/components/Alert/Alert';
+import Alert from 'common/components/Alert';
 import { useDispatch } from 'react-redux';
 import TodoTypeForm from 'features/todoTypes/containers/TodoTypeForm';
 import { newTodoType } from 'features/todoTypes/TodoType';

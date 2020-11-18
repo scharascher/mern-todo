@@ -1,10 +1,9 @@
 import React from 'react';
-import 'common/components/Select/Dropdown.scss';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { DropdownValue, Option } from 'common/helpers/Option';
+import { DropdownValue, Option } from 'types/Option';
 
 const Dropdown: React.FC<{
     id?: string;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import 'common/containers/LogoutRedirect/LogoutRedirect.scss';
-import Api from 'common/helpers/api';
+import Api from 'utils/api';
 import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';

@@ -4,11 +4,13 @@ import { Redirect } from 'react-router-dom';
 
 const ManageType: React.FC = () => {
     const [redirect, setRedirect] = useState(false);
-
+    const onClick = (): void => {
+        setRedirect(true);
+    };
     return (
         <>
             {redirect && <Redirect to="/todo-types" />}
-            <Button variant="contained" color="primary" onClick={(): void => setRedirect(true)}>
+            <Button variant="contained" color="primary" onClick={onClick}>
                 Add type
             </Button>
         </>

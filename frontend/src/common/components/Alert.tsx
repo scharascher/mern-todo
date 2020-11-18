@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import 'common/components/Alert/Alert.scss';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { Color } from '@material-ui/lab/Alert';
 

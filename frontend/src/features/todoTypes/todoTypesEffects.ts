@@ -1,4 +1,4 @@
-import Api from 'common/helpers/api';
+import Api from 'utils/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from 'app/rootReducer';
 import { newTodoType, TodoType } from 'features/todoTypes/TodoType';

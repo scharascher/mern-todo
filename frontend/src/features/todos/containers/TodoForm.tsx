@@ -1,10 +1,10 @@
 import React, { SyntheticEvent } from 'react';
-import Input from 'common/components/Input/Input';
-import Dropdown from 'common/components/Select/Dropdown';
-import { Option } from 'common/helpers/Option';
-import DateInput from 'common/components/Date/DateInput';
+import Input from 'common/components/Input';
+import Dropdown from 'common/components/Dropdown';
+import { Option } from 'types/Option';
+import DateInput from 'common/components/DateInput';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
-import Submit from 'common/components/Submit/Submit';
+import Submit from 'common/components/Submit';
 import { newTodo, Todo } from 'features/todos/Todo';
 import ManageType from 'features/todos/components/ManageType';
 import TypeDropdown from 'features/todos/containers/TypeDropdown';

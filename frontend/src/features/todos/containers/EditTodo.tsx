@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TodoForm from 'features/todos/containers/TodoForm';
 import { Container } from '@material-ui/core';
-import Alert from 'common/components/Alert/Alert';
+import Alert from 'common/components/Alert';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editTodo, fetchTodos } from 'features/todos/todosEffects';
