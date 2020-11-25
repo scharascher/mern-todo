@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import LogoutRedirect from 'common/containers/LogoutRedirect';
+import LogoutRedirect from 'common/LogoutRedirect';
 
 const LogoutButton: React.FC = () => {
     const [logout, setLogout] = useState<boolean>(false);

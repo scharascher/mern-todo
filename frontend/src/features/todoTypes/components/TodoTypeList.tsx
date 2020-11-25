@@ -6,8 +6,8 @@ interface Props {
     items: TodoType[];
 }
 
-const TodoTypeList: React.FC<Props> = (props) => {
-    const todos = props.items?.map((todoType: TodoType) => {
+const TodoTypeList: React.FC<Props> = ({ items }) => {
+    const todos = items?.map((todoType: TodoType) => {
         return <TodoTypeItem item={todoType} key={todoType._id} />;
     });
 

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import Dropdown from 'common/components/Dropdown';
-import { useDispatch, useSelector } from 'react-redux';
+import Dropdown from 'common/Dropdown';
+import { useSelector } from 'react-redux';
 import { getTodoTypesOptions } from 'features/todoTypes/todoTypesSelectors';
 import { fetchTodoTypes } from 'features/todoTypes/todoTypesEffects';
+import { useAppDispatch } from 'app/store';
 
 interface Props {
     handleTypeChange: (event: React.ChangeEvent<{ value: string }>) => void;
@@ -10,7 +11,7 @@ interface Props {
 }
 const TypeDropdown: React.FC<Props> = ({ handleTypeChange, value }) => {
     const types = useSelector(getTodoTypesOptions);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchTodoTypes());
     });

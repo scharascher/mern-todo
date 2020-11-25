@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Alert from 'common/components/Alert';
+import Alert from 'common/Alert';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { newTodoType, TodoType } from 'types/TodoType';
 import { editTodoType } from 'features/todoTypes/todoTypesEffects';
-import TodoTypeForm from 'features/todoTypes/containers/TodoTypeForm';
+import TodoTypeForm from 'features/todoTypes/components/TodoTypeForm';
+import { useAppDispatch } from 'app/store';
 
 interface Props {
     todoType: TodoType;
@@ -13,7 +13,7 @@ interface Props {
 
 const EditTodoType: React.FC<Props> = ({ todoType, onEditSuccess }) => {
     const [open, setOpen] = useState<boolean>(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const onSubmit = (data: newTodoType): void => {
         setOpen(true);

@@ -2,6 +2,7 @@ import rootReducer, { RootState } from 'app/rootReducer';
 import { configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { Action } from 'typesafe-actions';
 import logger from 'redux-logger';
+import { useDispatch } from 'react-redux';
 
 const store = configureStore({
     reducer: rootReducer,
@@ -17,4 +18,5 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 
 export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 export default store;

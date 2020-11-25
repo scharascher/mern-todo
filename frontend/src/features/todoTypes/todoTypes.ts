@@ -2,14 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TodoType } from 'types/TodoType';
 import { addTodoType, deleteTodoType, editTodoType, fetchTodoTypes, } from 'features/todoTypes/todoTypesEffects';
 
-export interface TodoTypesStateType {
+export interface TodoTypesState {
     items: Record<string, TodoType>;
     ids: string[];
     isFetching: boolean;
     lastUpdated?: number | undefined;
 }
-
-export type TodoTypesState = Readonly<TodoTypesStateType>;
 
 const initialState: TodoTypesState = {
     items: {},
@@ -17,20 +15,20 @@ const initialState: TodoTypesState = {
     isFetching: false,
 };
 
-const addTodoTypeSuccess = (state: TodoTypesStateType, action: PayloadAction<TodoType>): void => {
+const addTodoTypeSuccess = (state: TodoTypesState, action: PayloadAction<TodoType>): void => {
     state.items[action.payload._id] = action.payload;
 };
-const editTodoTypeSuccess = (state: TodoTypesStateType, action: PayloadAction<TodoType>): void => {
+const editTodoTypeSuccess = (state: TodoTypesState, action: PayloadAction<TodoType>): void => {
     state.items[action.payload._id] = action.payload;
 };
-const deleteTodoTypeSuccess = (state: TodoTypesStateType, action: PayloadAction<string>): void => {
+const deleteTodoTypeSuccess = (state: TodoTypesState, action: PayloadAction<string>): void => {
     delete state.items[action.payload as string];
 };
-const loadTodoTypes = (state: TodoTypesStateType): void => {
+const loadTodoTypes = (state: TodoTypesState): void => {
     state.isFetching = true;
 };
 const saveTodoTypes = (
-    state: TodoTypesStateType,
+    state: TodoTypesState,
     action: PayloadAction<{ items: TodoType[]; lastUpdated: number }>,
 ): void => {
     state.isFetching = false;
@@ -44,7 +42,7 @@ const saveTodoTypes = (
 };
 
 export default createSlice({
-    name: 'todos',
+    name: 'todoTypes',
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {

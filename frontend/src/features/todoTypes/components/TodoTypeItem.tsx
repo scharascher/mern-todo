@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TodoType } from 'types/TodoType';
 import TodoTypeItemInner from 'features/todoTypes/components/TodoTypeItemInner';
-import EditTodoType from 'features/todoTypes/containers/EditTodoType';
+import EditTodoType from 'features/todoTypes/components/EditTodoType';
 
 interface Props {
     item: TodoType;

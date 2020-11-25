@@ -3,7 +3,7 @@ import { Todo } from 'types/Todo';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import DeleteTodoLink from 'features/todos/components/DeleteTodoLink';
-import TypeView from 'features/todos/containers/TypeView';
+import TypeView from 'features/todos/components/TypeView';
 
 interface Props {
     item: Todo;

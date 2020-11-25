@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { checkAuth } from 'features/auth/authEffects';
+import { useAppDispatch } from 'app/store';
 
 const CheckAuth: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(checkAuth());
     }, [dispatch]);

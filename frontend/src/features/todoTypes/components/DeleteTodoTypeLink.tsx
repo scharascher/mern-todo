@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import DeleteTodoType from 'features/todoTypes/containers/DeleteTodoType';
+import DeleteTodoType from 'features/todoTypes/components/DeleteTodoType';
 
 interface Props {
     _id: string;

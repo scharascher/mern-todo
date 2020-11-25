@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
-import Input from 'common/components/Input';
-import Submit from 'common/components/Submit';
+import Input from 'common/Input';
+import Submit from 'common/Submit';
 import { newTodoType, TodoType } from 'types/TodoType';
 
 interface Props {

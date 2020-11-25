@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import LogoutButton from 'common/containers/LogoutButton';
+import LogoutButton from 'common/LogoutButton';
 import { useSelector } from 'react-redux';
 import { getIsAuthenticated } from 'features/auth/authSelectors';
 
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const Navbar: React.FC = () => {
     const classes = useStyles();
     const isAuthenticated = useSelector(getIsAuthenticated);
-
     const getViewByIsAuthenticated = (): React.ReactNode => {
         switch (isAuthenticated) {
             case true:

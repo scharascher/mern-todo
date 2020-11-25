@@ -20,6 +20,9 @@ export const getTodoTypesOptions = createSelector(getTodoTypesItems, (items): Op
         label: item.name,
     }));
 });
+export const getTodoTypesIsFetching = createSelector(getTodoTypes, (todoTypes) => {
+    return todoTypes.isFetching;
+});
 
 export function returnGetTodoTypeById(_id: string) {
     return createSelector(getTodoTypes, (todoTypes) => {

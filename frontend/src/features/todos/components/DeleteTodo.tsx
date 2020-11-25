@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { deleteTodo } from 'features/todos/todosEffects';
+import { useAppDispatch } from 'app/store';
 
 interface Props {
     _id: string;
 }
 
 const DeleteTodo: React.FC<Props> = ({ _id }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(deleteTodo(_id));

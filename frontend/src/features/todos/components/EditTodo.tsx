@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import TodoForm from 'features/todos/containers/TodoForm';
+import TodoForm from 'features/todos/components/TodoForm';
 import { Container } from '@material-ui/core';
-import Alert from 'common/components/Alert';
+import Alert from 'common/Alert';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { editTodo, fetchTodos } from 'features/todos/todosEffects';
 import { returnGetTodoById } from 'features/todos/todosSelectors';
 import { newTodo } from 'types/Todo';
+import { useAppDispatch } from 'app/store';
 
 const EditTodo: React.FC<RouteComponentProps<{ id: string }>> = (props) => {
     const [open, setOpen] = useState<boolean>(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const todo = useSelector(returnGetTodoById(props.match.params.id));
 
     useEffect(() => {

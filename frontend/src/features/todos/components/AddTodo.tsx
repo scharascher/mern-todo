@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import TodoForm from 'features/todos/containers/TodoForm';
+import TodoForm from 'features/todos/components/TodoForm';
 import { Container } from '@material-ui/core';
 import { newTodo } from 'types/Todo';
-import Alert from 'common/components/Alert';
-import { useDispatch } from 'react-redux';
+import Alert from 'common/Alert';
 import { addTodo } from 'features/todos/todosEffects';
+import { useAppDispatch } from 'app/store';
 
 const AddTodo: React.FC = () => {
     const [open, setOpen] = useState(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const onSubmit = (data: newTodo): void => {
         setOpen(true);
         dispatch(addTodo(data));

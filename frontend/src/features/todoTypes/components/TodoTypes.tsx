@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { TodoType } from 'types/TodoType';
 import TodoTypeList from 'features/todoTypes/components/TodoTypeList';
-import AddTodoType from 'features/todoTypes/containers/AddTodoType';
+import AddTodoType from 'features/todoTypes/components/AddTodoType';
 
 interface Props {
     todoTypes: TodoType[];

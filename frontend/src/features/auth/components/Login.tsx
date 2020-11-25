@@ -1,9 +1,8 @@
 import React from 'react';
-import Api from 'utils/api';
-import LoginForm, { LoginData } from 'features/auth/containers/LoginForm';
+import LoginForm, { LoginData } from 'features/auth/components/LoginForm';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setAuthenticated } from 'features/auth/auth';
+import { login } from 'features/auth/authEffects';
+import { useAppDispatch } from 'app/store';
 
 const Login: React.FC = () => {
     const history = useHistory();
@@ -12,15 +11,13 @@ const Login: React.FC = () => {
         pathname: '/',
     };
     const from = locationFrom.pathname !== '/' ? locationFrom : { pathname: '/todos' };
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleSubmit = (data: LoginData): void => {
-        Api.authorizedRequest('login', 'POST', data).then(() => {
-            dispatch(setAuthenticated(true));
+        dispatch(login(data)).then(() => {
             history.replace(from);
         });
     };
-
     return (
         <>
             <LoginForm onSubmit={handleSubmit}>Login</LoginForm>

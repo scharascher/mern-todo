@@ -1,7 +1,6 @@
 const routes = require('express').Router();
 const handleRouteError = require('../utils/handleRouteError');
 const Todo = require('../models/todo.model');
-const TodoType = require('../models/todoType.model');
 
 routes.route('/').get((req, res, next) => {
     handleRouteError(

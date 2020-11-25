@@ -2,14 +2,12 @@ import { Todo } from 'types/Todo';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { addTodo, deleteTodo, editTodo, fetchTodos } from 'features/todos/todosEffects';
 
-export interface TodosStateType {
+export interface TodosState {
     items: Record<string, Todo>;
     ids: string[];
     isFetching: boolean;
     lastUpdated?: number | undefined;
 }
-
-export type TodosState = Readonly<TodosStateType>;
 
 const initialState: TodosState = {
     items: {},
@@ -17,20 +15,20 @@ const initialState: TodosState = {
     isFetching: false,
 };
 
-const addTodoSuccess = (state: TodosStateType, action: PayloadAction<Todo>): void => {
+const addTodoSuccess = (state: TodosState, action: PayloadAction<Todo>): void => {
     state.items[action.payload._id] = action.payload;
 };
-const editTodoSuccess = (state: TodosStateType, action: PayloadAction<Todo>): void => {
+const editTodoSuccess = (state: TodosState, action: PayloadAction<Todo>): void => {
     state.items[action.payload._id] = action.payload;
 };
-const deleteTodoSuccess = (state: TodosStateType, action: PayloadAction<string>): void => {
+const deleteTodoSuccess = (state: TodosState, action: PayloadAction<string>): void => {
     delete state.items[action.payload as string];
 };
-const loadTodos = (state: TodosStateType): void => {
+const loadTodos = (state: TodosState): void => {
     state.isFetching = true;
 };
 const saveTodos = (
-    state: TodosStateType,
+    state: TodosState,
     action: PayloadAction<{ items: Todo[]; lastUpdated: number }>,
 ): void => {
     state.isFetching = false;

@@ -1,13 +1,13 @@
 import React, { SyntheticEvent } from 'react';
-import Input from 'common/components/Input';
-import Dropdown from 'common/components/Dropdown';
+import Input from 'common/Input';
+import Dropdown from 'common/Dropdown';
 import { Option } from 'types/Option';
-import DateInput from 'common/components/DateInput';
+import DateInput from 'common/DateInput';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
-import Submit from 'common/components/Submit';
+import Submit from 'common/Submit';
 import { newTodo, Todo } from 'types/Todo';
 import ManageType from 'features/todos/components/ManageType';
-import TypeDropdown from 'features/todos/containers/TypeDropdown';
+import TypeDropdown from 'features/todos/components/TypeDropdown';
 
 const priorities: Option[] = [
     {
